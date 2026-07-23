@@ -23,12 +23,10 @@
             background:radial-gradient(ellipse 60% 50% at 25% 40%,rgba(124,106,239,.07),transparent),
                         radial-gradient(ellipse 50% 60% at 75% 70%,rgba(45,212,160,.05),transparent)}
         .wrap{max-width:780px;margin:0 auto;padding:20px;position:relative;z-index:1}
-
         header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);margin-bottom:40px}
         .logo{font-size:26px;font-weight:700;letter-spacing:-.04em;
             background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .logo-sub{font-size:12px;color:var(--t3);letter-spacing:.02em}
-
         .drop-zone{border:2px dashed var(--border);border-radius:20px;padding:56px 32px;text-align:center;cursor:pointer;
             background:var(--bg2);transition:all .35s ease;position:relative;overflow:hidden}
         .drop-zone::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,106,239,.06),rgba(45,212,160,.03));opacity:0;transition:opacity .35s}
@@ -42,10 +40,10 @@
         .dz-title{font-size:19px;font-weight:600;margin-bottom:6px;position:relative;z-index:1}
         .dz-sub{font-size:13px;color:var(--t2);position:relative;z-index:1}
         .dz-sub b{color:var(--accent);font-weight:600}
+        .dz-note{font-size:11px;color:var(--t3);margin-top:10px;position:relative;z-index:1;opacity:.7}
         .dz-formats{margin-top:14px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
         .fmt{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;background:var(--card-h);color:var(--t3);text-transform:uppercase;letter-spacing:.06em}
         input[type=file]{display:none}
-
         .finfo{display:none;align-items:center;gap:14px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);margin-top:18px}
         .finfo.show{display:flex}
         .finfo-icon{width:42px;height:42px;border-radius:var(--radius-sm);background:var(--card-h);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:20px;flex-shrink:0}
@@ -54,33 +52,20 @@
         .finfo-size{font-size:11px;color:var(--t3);margin-top:2px}
         .finfo-del{width:30px;height:30px;border-radius:8px;border:none;background:transparent;color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .2s}
         .finfo-del:hover{background:var(--red-bg);color:var(--red)}
-
         .btn-sm{padding:7px 15px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);color:var(--t2);
             font-family:inherit;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
         .btn-sm:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,106,239,.07)}
         .btn-sm.ok{border-color:var(--green);color:var(--green);background:var(--green-glow)}
         .btn-sm.danger:hover{border-color:var(--red);color:var(--red);background:var(--red-bg)}
-
-        .prog{margin-top:22px;display:none}
-        .prog.show{display:block}
-        .prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
-        .prog-lbl{font-size:12px;font-weight:500;color:var(--t2)}
-        .prog-pct{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
-        .prog-bar{height:5px;background:var(--card-h);border-radius:3px;overflow:hidden}
-        .prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px;transition:width .25s ease}
-        .prog-status{margin-top:7px;font-size:11px;color:var(--t3)}
-
         .err{display:none;align-items:center;gap:9px;padding:13px 16px;background:var(--red-bg);border:1px solid var(--red-border);
             border-radius:var(--radius-sm);color:var(--red);font-size:12px;margin-top:18px;animation:fadeUp .3s ease}
         .err.show{display:flex}
         @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
         .result{display:none;margin-top:32px;animation:fadeUp .5s ease}
         .result.show{display:block}
         .player-wrap{border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--border)}
         .player-wrap video{width:100%;display:block;max-height:480px;object-fit:contain;background:#000}
         .sec-title{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin:24px 0 10px}
-
         .link-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--border);
             border-radius:var(--radius-sm);margin-bottom:8px;transition:all .2s}
         .link-row:hover{border-color:var(--border-h);background:var(--card-h)}
@@ -89,11 +74,35 @@
         .link-tag.cdn{background:rgba(124,106,239,.14);color:var(--accent)}
         .link-tag.cdn2{background:var(--green-glow);color:var(--green)}
         .link-url{flex:1;font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'SF Mono','Fira Code','Cascadia Code',monospace}
-
         .again-wrap{margin-top:28px;text-align:center}
         .btn-again{padding:12px 30px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg2);
             color:var(--t2);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:8px}
         .btn-again:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,106,239,.06);transform:translateY(-1px)}
+
+        /* ── Upload Overlay ── */
+        .upload-overlay{position:fixed;inset:0;background:rgba(8,8,13,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+            z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s ease}
+        .upload-overlay.show{opacity:1;visibility:visible}
+        .ol-card-wrap{position:relative;border-radius:28px;padding:2px}
+        .ol-spinner{position:absolute;inset:0;border-radius:28px;overflow:hidden;z-index:0}
+        .ol-spinner::before{content:'';position:absolute;top:50%;left:50%;width:200%;height:200%;
+            background:conic-gradient(from 0deg,transparent 0%,var(--accent) 12%,var(--green) 24%,transparent 36%,var(--blue) 50%,var(--accent) 62%,var(--green) 74%,transparent 88%);
+            animation:ol-spin 2s linear infinite;transform:translate(-50%,-50%)}
+        @keyframes ol-spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+        .ol-card{position:relative;z-index:1;border-radius:26px;background:var(--card);padding:44px 52px 40px;text-align:center;min-width:300px;
+            transform:translateY(20px) scale(.95);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+        .upload-overlay.show .ol-card{transform:translateY(0) scale(1)}
+        .ol-ring-wrap{position:relative;width:160px;height:160px;margin:0 auto 22px}
+        .ol-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:190px;height:190px;border-radius:50%;
+            background:radial-gradient(circle,var(--accent-glow) 0%,transparent 65%);animation:ol-glow-pulse 2s ease-in-out infinite;pointer-events:none}
+        @keyframes ol-glow-pulse{0%,100%{opacity:.35;transform:translate(-50%,-55%) scale(.85)}50%{opacity:.75;transform:translate(-50%,-55%) scale(1.15)}}
+        .ol-ring{display:block;margin:0 auto;transform:rotate(-90deg)}
+        .ol-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:38px;font-weight:700;letter-spacing:-.03em;
+            background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-variant-numeric:tabular-nums}
+        .ol-server{display:inline-block;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+            background:rgba(124,106,239,.15);color:var(--accent)}
+        .ol-fname{font-size:13px;font-weight:500;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px;margin-left:auto;margin-right:auto}
+        .ol-status{font-size:12px;color:var(--t3);font-variant-numeric:tabular-nums;min-height:18px}
 
         /* ── History ── */
         .history{margin-top:44px;padding-top:32px;border-top:1px solid var(--border)}
@@ -106,11 +115,9 @@
             text-transform:uppercase;letter-spacing:.06em;display:none;align-items:center;gap:5px}
         .btn-clear.show{display:inline-flex}
         .btn-clear:hover{background:var(--red-bg)}
-
         .h-list{display:flex;flex-direction:column;gap:10px}
         .h-empty{text-align:center;padding:36px 20px;color:var(--t3);font-size:13px}
         .h-empty .iconify{font-size:32px;margin-bottom:10px;display:block;opacity:.4}
-
         .h-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;transition:all .3s;animation:fadeUp .35s ease}
         .h-card:hover{border-color:var(--border-h);background:var(--card-h)}
         .h-card-top{display:flex;align-items:center;gap:12px;padding:14px 16px}
@@ -121,65 +128,54 @@
         .h-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
         .h-time{font-size:11px;color:var(--t3)}
         .h-actions{display:flex;gap:6px;flex-shrink:0}
-
-        .h-links{display:none;padding:0 16px 14px;border-top:1px solid var(--border);margin-top:0}
+        .h-links{display:none;padding:0 16px 14px;border-top:1px solid var(--border)}
         .h-links.show{display:block;padding-top:12px}
         .h-link-row{display:flex;align-items:center;gap:8px;padding:7px 0}
         .h-link-row .link-tag{font-size:9px;min-width:36px;padding:2px 7px}
         .h-link-row .link-url{font-size:11px}
         .h-link-row .btn-sm{padding:5px 10px;font-size:10px}
-
         .h-toggle{padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:transparent;
             color:var(--t2);font-family:inherit;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;
             display:flex;align-items:center;gap:4px}
         .h-toggle:hover{border-color:var(--accent);color:var(--accent)}
         .h-toggle .iconify{font-size:13px;transition:transform .25s}
         .h-toggle.open .iconify{transform:rotate(180deg)}
-
         .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);padding:11px 22px;
             background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--t1);font-size:12px;font-weight:500;
-            display:flex;align-items:center;gap:7px;z-index:999;transition:transform .45s cubic-bezier(.16,1,.3,1);
+            display:flex;align-items:center;gap:7px;z-index:200;transition:transform .45s cubic-bezier(.16,1,.3,1);
             box-shadow:0 14px 44px rgba(0,0,0,.45)}
         .toast.show{transform:translateX(-50%) translateY(0)}
         .toast .iconify{color:var(--green);font-size:17px}
         .toast.red .iconify{color:var(--red)}
-
         footer{text-align:center;padding:36px 0 24px;color:var(--t3);font-size:11px}
         footer a{color:var(--t2);text-decoration:none;transition:color .2s}
         footer a:hover{color:var(--accent)}
-
         @media(max-width:640px){
-            .wrap{padding:14px}
-            .drop-zone{padding:38px 18px}
-            .dz-title{font-size:17px}
-            .link-row,.h-link-row{flex-wrap:wrap}
-            .link-url,.h-link-row .link-url{width:100%;order:3}
-            .logo-sub{display:none}
-            .h-card-top{flex-wrap:wrap}
-            .h-actions{width:100%;justify-content:flex-end;margin-top:4px}
+            .wrap{padding:14px}.drop-zone{padding:38px 18px}.dz-title{font-size:17px}
+            .link-row,.h-link-row{flex-wrap:wrap}.link-url,.h-link-row .link-url{width:100%;order:3}
+            .logo-sub{display:none}.h-card-top{flex-wrap:wrap}.h-actions{width:100%;justify-content:flex-end;margin-top:4px}
+            .ol-card{padding:36px 28px 32px;min-width:auto;margin:0 16px}
         }
     </style>
 </head>
 <body>
 <div class="bg-glow"></div>
 <div class="wrap">
-
     <header>
         <div class="logo">videy</div>
         <div class="logo-sub">Video hosting sederhana</div>
     </header>
-
     <main>
         <div class="drop-zone" id="dz">
             <div class="dz-icon"><span class="iconify" data-icon="mdi:cloud-upload-outline"></span></div>
             <div class="dz-title">Drag & drop video di sini</div>
             <div class="dz-sub">atau <b>pilih file</b> — upload otomatis</div>
+            <div class="dz-note">Maksimal 100MB per file</div>
             <div class="dz-formats">
                 <span class="fmt">MP4</span><span class="fmt">WEBM</span><span class="fmt">MOV</span><span class="fmt">AVI</span><span class="fmt">MKV</span>
             </div>
             <input type="file" id="fi" accept="video/*">
         </div>
-
         <div class="finfo" id="finfo">
             <div class="finfo-icon"><span class="iconify" data-icon="mdi:filmstrip-box"></span></div>
             <div class="finfo-body">
@@ -188,50 +184,21 @@
             </div>
             <button class="finfo-del" id="fdel" title="Hapus"><span class="iconify" data-icon="mdi:close"></span></button>
         </div>
-
-        <div class="prog" id="prog">
-            <div class="prog-top">
-                <span class="prog-lbl">Mengupload...</span>
-                <span class="prog-pct" id="pPct">0%</span>
-            </div>
-            <div class="prog-bar"><div class="prog-fill" id="pFill"></div></div>
-            <div class="prog-status" id="pStatus">Mempersiapkan upload...</div>
-        </div>
-
         <div class="err" id="err">
             <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
             <span id="errTxt">Terjadi kesalahan</span>
         </div>
-
         <div class="result" id="res">
             <div class="player-wrap">
                 <video id="vid" controls preload="metadata"></video>
             </div>
-            <div class="sec-title">Link Video</div>
-            <div class="link-row">
-                <span class="link-tag page">Page</span>
-                <span class="link-url" id="uPage">—</span>
-                <button class="btn-sm" onclick="copyEl('uPage',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
-            </div>
-            <div class="sec-title">Link Direct CDN</div>
-            <div class="link-row">
-                <span class="link-tag cdn">CDN</span>
-                <span class="link-url" id="u1">—</span>
-                <button class="btn-sm" onclick="copyEl('u1',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
-            </div>
-            <div class="link-row">
-                <span class="link-tag cdn2">CDN2</span>
-                <span class="link-url" id="u2">—</span>
-                <button class="btn-sm" onclick="copyEl('u2',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
-            </div>
+            <div id="linkRows"></div>
             <div class="again-wrap">
                 <button class="btn-again" onclick="reset()">
                     <span class="iconify" data-icon="mdi:plus"></span> Upload Lagi
                 </button>
             </div>
         </div>
-
-        <!-- ── History ── -->
         <div class="history" id="histSection">
             <div class="history-head">
                 <div class="history-title">
@@ -246,8 +213,30 @@
             <div class="h-list" id="hList"></div>
         </div>
     </main>
+    <footer>Powered by <a href="../" target="_blank">videy.co</a></footer>
+</div>
 
-    <footer>Powered by <a href="https://videy.co" target="_blank">videy.co</a> API</footer>
+<div class="upload-overlay" id="ol">
+    <div class="ol-card-wrap">
+        <div class="ol-spinner"></div>
+        <div class="ol-card">
+            <div class="ol-ring-wrap">
+                <div class="ol-glow"></div>
+                <svg class="ol-ring" width="160" height="160" viewBox="0 0 160 160">
+                    <defs><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#7c6aef"/><stop offset="100%" stop-color="#2dd4a0"/>
+                    </linearGradient></defs>
+                    <circle cx="80" cy="80" r="68" fill="none" stroke="#252538" stroke-width="6"/>
+                    <circle id="olRingFill" cx="80" cy="80" r="68" fill="none" stroke="url(#ringGrad)" stroke-width="6" stroke-linecap="round"
+                        stroke-dasharray="427.26" stroke-dashoffset="427.26" style="transition:stroke-dashoffset .2s ease-out"/>
+                </svg>
+                <div class="ol-pct" id="olPct">0%</div>
+            </div>
+            <div class="ol-server">videy.co</div>
+            <div class="ol-fname" id="olFname">video.mp4</div>
+            <div class="ol-status" id="olStatus">Mempersiapkan upload...</div>
+        </div>
+    </div>
 </div>
 
 <div class="toast" id="toast">
@@ -256,453 +245,133 @@
 </div>
 
 <script>
-/* ── Shorthand ── */
 var $=function(id){return document.getElementById(id)};
 var dz=$('dz'),fi=$('fi'),finfo=$('finfo'),fname=$('fname'),fsize=$('fsize'),
-    fdel=$('fdel'),prog=$('prog'),pPct=$('pPct'),pFill=$('pFill'),
-    pStatus=$('pStatus'),err=$('err'),errTxt=$('errTxt'),res=$('res'),vid=$('vid'),
-    uPage=$('uPage'),u1=$('u1'),u2=$('u2'),
-    toastEl=$('toast'),toastTxt=$('toastTxt'),
-    hList=$('hList'),histCount=$('histCount'),btnClear=$('btnClear');
+    fdel=$('fdel'),err=$('err'),errTxt=$('errTxt'),res=$('res'),vid=$('vid'),
+    linkRows=$('linkRows'),toastEl=$('toast'),toastTxt=$('toastTxt'),
+    hList=$('hList'),histCount=$('histCount'),btnClear=$('btnClear'),
+    ol=$('ol'),olRingFill=$('olRingFill'),olPct=$('olPct'),
+    olFname=$('olFname'),olStatus=$('olStatus');
 
-var currentFile=null;
-var isUploading=false;
-var STORAGE_KEY='videy_hist_v2';
+var currentFile=null,isUploading=false,STORAGE_KEY='videy_hist_v8',
+    CIRCUMFERENCE=427.26,MAX_SIZE=100*1024*1024;
 
-/* ══════════════════════════════════════
-   HISTORY — semua dibungkus try-catch
-   supaya TIDAK PERNAH blokir flow utama
-   ══════════════════════════════════════ */
+/* ═══════ OVERLAY ═══════ */
+function showOv(n){olFname.textContent=n;olPct.textContent='0%';
+    olRingFill.style.strokeDashoffset=CIRCUMFERENCE;olStatus.textContent='Mempersiapkan upload...';ol.classList.add('show')}
+function hideOv(){ol.classList.remove('show')}
+function upOv(p){olPct.textContent=p+'%';olRingFill.style.strokeDashoffset=CIRCUMFERENCE*(1-p/100)}
 
-function getHistory(){
-    try{
-        var raw=localStorage.getItem(STORAGE_KEY);
-        if(!raw)return[];
-        var parsed=JSON.parse(raw);
-        if(!Array.isArray(parsed))return[];
-        /* filter hanya item yang valid */
-        return parsed.filter(function(item){
-            return item&&typeof item.id==='string'&&item.id.length>2;
-        });
-    }catch(e){return[]}
-}
+/* ═══════ HISTORY ═══════ */
+function gH(){try{var r=localStorage.getItem(STORAGE_KEY);if(!r)return[];var p=JSON.parse(r);
+    if(!Array.isArray(p))return[];return p.filter(function(i){return i&&typeof i.id==='string'&&i.id.length>2})}catch(e){return[]}}
+function sH(a){try{if(a.length>50)a=a.slice(0,50);localStorage.setItem(STORAGE_KEY,JSON.stringify(a))}catch(e){}}
+function aH(item){try{if(!item.ts)item.ts=Date.now();var h=gH();h.unshift(item);sH(h);rH()}catch(e){}}
+function rmH(ts){try{sH(gH().filter(function(i){return i.ts!==ts}));rH();showToast('Dihapus dari riwayat','red')}catch(e){}}
+function clH(){try{sH([]);rH();showToast('Semua riwayat dihapus','red')}catch(e){}}
 
-function saveHistory(arr){
-    try{
-        if(arr.length>50)arr=arr.slice(0,50);
-        localStorage.setItem(STORAGE_KEY,JSON.stringify(arr));
-    }catch(e){/* localStorage penuh atau disabled — abaikan */}
-}
+function rH(){try{var h=gH();histCount.textContent=h.length;
+    if(h.length>0)btnClear.classList.add('show');else btnClear.classList.remove('show');
+    if(!h.length){hList.innerHTML='<div class="h-empty"><span class="iconify" data-icon="mdi:video-off-outline"></span>Belum ada video diupload</div>';return}
+    var html='';for(var i=0;i<h.length;i++){var it=h[i],v=it.id;
+        html+='<div class="h-card" data-ts="'+it.ts+'"><div class="h-card-top"><div class="h-thumb">'
+        +'<video src="https://cdn.videy.co/'+eA(v)+'.mp4" preload="metadata" muted onloadeddata="this.currentTime=1"></video>'
+        +'<div class="play-icon"><span class="iconify" data-icon="mdi:play-circle"></span></div></div>'
+        +'<div class="h-body"><div class="h-name">'+eH(it.name||'video')+'</div>'
+        +'<div class="h-time">'+tA(it.ts)+'</div></div>'
+        +'<div class="h-actions"><button class="h-toggle" onclick="tHL(this)">'
+        +'<span class="iconify" data-icon="mdi:chevron-down"></span> Link</button>'
+        +'<button class="btn-sm danger" onclick="rmH('+it.ts+')">'
+        +'<span class="iconify" data-icon="mdi:trash-can-outline"></span></button></div></div>'
+        +'<div class="h-links">'
+        +mH('page','Page','https://videy.co/v/?id='+v)
+        +mH('cdn','CDN','https://cdn.videy.co/'+v+'.mp4')
+        +mH('cdn2','CDN2','https://cdn2.videy.co/'+v+'.mp4')
+        +'</div></div>'}hList.innerHTML=html}catch(e){}}
+function mH(t,l,u){return'<div class="h-link-row"><span class="link-tag '+t+'">'+l+'</span>'
+    +'<span class="link-url">'+eH(u)+'</span><button class="btn-sm" data-copy="'+eA(u)+'" onclick="cpB(this)">'
+    +'<span class="iconify" data-icon="mdi:content-copy"></span> Salin</button></div>'}
+function tHL(b){b.classList.toggle('open');var l=b.closest('.h-card').querySelector('.h-links');
+    if(l.classList.contains('show'))l.classList.remove('show');else l.classList.add('show')}
+function eH(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function eA(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function tA(ts){try{var d=Date.now()-ts;if(d<0)d=0;var m=Math.floor(d/60000);
+    if(m<1)return'Baru saja';if(m<60)return m+' menit lalu';var h=Math.floor(m/60);
+    if(h<24)return h+' jam lalu';var dd=Math.floor(h/24);if(dd<30)return dd+' hari lalu';
+    return new Date(ts).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}catch(e){return''}}
 
-function addToHistory(id,name){
-    try{
-        var h=getHistory();
-        h.unshift({id:id,name:name||'video',ts:Date.now()});
-        saveHistory(h);
-        renderHistory();
-    }catch(e){console.warn('History save failed:',e)}
-}
+/* ═══════ UTILITAS ═══════ */
+function fB(b){if(!b)return'0 B';var k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k));return(b/Math.pow(k,i)).toFixed(1)+' '+s[i]}
+function showToast(msg,type){toastTxt.textContent=msg;
+    if(type==='red'){toastEl.classList.add('red');toastEl.querySelector('.iconify').setAttribute('data-icon','mdi:delete-outline')}
+    else{toastEl.classList.remove('red');toastEl.querySelector('.iconify').setAttribute('data-icon','mdi:check-circle')}
+    toastEl.classList.add('show');setTimeout(function(){toastEl.classList.remove('show')},2400)}
+function showErr(m){errTxt.textContent=m;err.classList.add('show');setTimeout(function(){err.classList.remove('show')},6000)}
 
-function removeHistory(ts){
-    try{
-        var h=getHistory().filter(function(i){return i.ts!==ts});
-        saveHistory(h);
-        renderHistory();
-        showToast('Dihapus dari riwayat','red');
-    }catch(e){}
-}
+/* ═══════ EKSTRAKSI VIDEO ID ═══════ */
+function eVI(d){if(!d)return null;if(d.video_id)return d.video_id;if(d.videoId)return d.videoId;
+    if(typeof d.id==='string'&&d.id.length>3&&d.id.length<30)return d.id;
+    var k=Object.keys(d);for(var i=0;i<k.length;i++){var v=d[k[i]];if(typeof v!=='string')continue;
+    var m=v.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);if(m)return m[1];m=v.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);if(m)return m[1]}return null}
+function eVIT(t){if(!t)return null;var m=t.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/)||t.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);return m?m[1]:null}
 
-function clearAllHistory(){
-    try{
-        saveHistory([]);
-        renderHistory();
-        showToast('Semua riwayat dihapus','red');
-    }catch(e){}
-}
+/* ═══════ UPLOAD ═══════ */
+function pickFile(f){if(!f)return;if(!f.type.startsWith('video/'))return showErr('File harus berformat video.');
+    if(isUploading)return;if(f.size>MAX_SIZE)return showErr('File terlalu besar! Maksimal 100MB. File ini '+fB(f.size)+'.');
+    currentFile=f;fname.textContent=f.name;fsize.textContent=fB(f.size);
+    finfo.classList.add('show');err.classList.remove('show');res.classList.remove('show');dz.classList.add('busy');
+    showOv(f.name);doUpload()}
 
-function renderHistory(){
-    try{
-        var h=getHistory();
-        histCount.textContent=h.length;
-        if(h.length>0){btnClear.classList.add('show')}else{btnClear.classList.remove('show')}
-
-        if(!h.length){
-            hList.innerHTML='<div class="h-empty"><span class="iconify" data-icon="mdi:video-off-outline"></span>Belum ada video diupload</div>';
-            return;
-        }
-
-        var html='';
-        for(var i=0;i<h.length;i++){
-            var item=h[i];
-            var vidId=item.id;
-            var pageU='https://videy.co/v/?id='+vidId;
-            var cdnU='https://cdn.videy.co/'+vidId+'.mp4';
-            var cdn2U='https://cdn2.videy.co/'+vidId+'.mp4';
-            var safeName=escHtml(item.name||'video');
-            var safeTime=timeAgo(item.ts);
-
-            html+='<div class="h-card" data-ts="'+item.ts+'">'
-                +'<div class="h-card-top">'
-                +'<div class="h-thumb">'
-                +'<video src="'+cdnU+'" preload="metadata" muted onloadeddata="this.currentTime=1"></video>'
-                +'<div class="play-icon"><span class="iconify" data-icon="mdi:play-circle"></span></div>'
-                +'</div>'
-                +'<div class="h-body">'
-                +'<div class="h-name">'+safeName+'</div>'
-                +'<div class="h-time">'+safeTime+'</div>'
-                +'</div>'
-                +'<div class="h-actions">'
-                +'<button class="h-toggle" onclick="toggleHLinks(this)">'
-                +'<span class="iconify" data-icon="mdi:chevron-down"></span> Link'
-                +'</button>'
-                +'<button class="btn-sm danger" onclick="removeHistory('+item.ts+')">'
-                +'<span class="iconify" data-icon="mdi:trash-can-outline"></span>'
-                +'</button>'
-                +'</div>'
-                +'</div>'
-                +'<div class="h-links">'
-                +'<div class="h-link-row">'
-                +'<span class="link-tag page">Page</span>'
-                +'<span class="link-url">'+pageU+'</span>'
-                +'<button class="btn-sm" onclick="copyTxt(\''+pageU+'\',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>'
-                +'</div>'
-                +'<div class="h-link-row">'
-                +'<span class="link-tag cdn">CDN</span>'
-                +'<span class="link-url">'+cdnU+'</span>'
-                +'<button class="btn-sm" onclick="copyTxt(\''+cdnU+'\',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>'
-                +'</div>'
-                +'<div class="h-link-row">'
-                +'<span class="link-tag cdn2">CDN2</span>'
-                +'<span class="link-url">'+cdn2U+'</span>'
-                +'<button class="btn-sm" onclick="copyTxt(\''+cdn2U+'\',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>'
-                +'</div>'
-                +'</div>'
-                +'</div>';
-        }
-        hList.innerHTML=html;
-    }catch(e){console.warn('History render failed:',e)}
-}
-
-function toggleHLinks(btn){
-    btn.classList.toggle('open');
-    var links=btn.closest('.h-card').querySelector('.h-links');
-    if(links.classList.contains('show')){links.classList.remove('show')}
-    else{links.classList.add('show')}
-}
-
-function escHtml(s){
-    var d=document.createElement('div');
-    d.textContent=s;
-    return d.innerHTML;
-}
-
-function timeAgo(ts){
-    try{
-        var diff=Date.now()-ts;
-        if(diff<0)diff=0;
-        var m=Math.floor(diff/60000);
-        if(m<1)return'Baru saja';
-        if(m<60)return m+' menit lalu';
-        var h=Math.floor(m/60);
-        if(h<24)return h+' jam lalu';
-        var d=Math.floor(h/24);
-        if(d<30)return d+' hari lalu';
-        return new Date(ts).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
-    }catch(e){return''}
-}
-
-/* ════════════════════
-   UTILITAS UMUM
-   ════════════════════ */
-
-function formatBytes(b){
-    if(!b)return'0 B';
-    var k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k));
-    return(b/Math.pow(k,i)).toFixed(1)+' '+s[i];
-}
-
-function showToast(msg,type){
-    toastTxt.textContent=msg;
-    if(type==='red'){
-        toastEl.classList.add('red');
-        toastEl.querySelector('.iconify').setAttribute('data-icon','mdi:delete-outline');
-    }else{
-        toastEl.classList.remove('red');
-        toastEl.querySelector('.iconify').setAttribute('data-icon','mdi:check-circle');
-    }
-    toastEl.classList.add('show');
-    setTimeout(function(){toastEl.classList.remove('show')},2400);
-}
-
-function showErr(msg){
-    errTxt.textContent=msg;
-    err.classList.add('show');
-    setTimeout(function(){err.classList.remove('show')},6000);
-}
-
-/* ════════════════════
-   EKSTRAK VIDEO ID
-   ════════════════════ */
-
-function extractId(data){
-    if(!data)return null;
-    /* cek key langsung */
-    if(data.video_id)return data.video_id;
-    if(data.videoId)return data.videoId;
-    if(typeof data.id==='string'&&data.id.length>3&&data.id.length<30)return data.id;
-
-    /* scan semua value string */
-    var keys=Object.keys(data);
-    for(var i=0;i<keys.length;i++){
-        var v=data[keys[i]];
-        if(typeof v!=='string')continue;
-        var m=v.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);
-        if(m)return m[1];
-        m=v.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
-        if(m)return m[1];
-    }
-    return null;
-}
-
-function extractIdFromText(txt){
-    if(!txt)return null;
-    var m=txt.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);
-    if(m)return m[1];
-    m=txt.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
-    return m?m[1]:null;
-}
-
-/* ════════════════════
-   UPLOAD FLOW
-   ════════════════════ */
-
-function pickFile(f){
-    if(!f)return;
-    if(!f.type.startsWith('video/'))return showErr('File harus berformat video.');
-    if(isUploading)return;
-
-    currentFile=f;
-    fname.textContent=f.name;
-    fsize.textContent=formatBytes(f.size);
-    finfo.classList.add('show');
-    err.classList.remove('show');
-    res.classList.remove('show');
-    dz.classList.add('busy');
-
-    startUpload();
-}
-
-function startUpload(){
-    if(!currentFile||isUploading)return;
-    isUploading=true;
-
-    prog.classList.add('show');
-    pFill.style.width='0%';
-    pPct.textContent='0%';
-    pStatus.textContent='Mempersiapkan upload...';
-
-    var fd=new FormData();
-    fd.append('file',currentFile);
-
-    /* simpan nama file sebelum XHR callback (karena currentFile bisa berubah) */
-    var savedName=currentFile.name;
-
+function doUpload(){if(!currentFile||isUploading)return;isUploading=true;
+    var fd=new FormData(),savedName=currentFile.name;fd.append('file',currentFile);
     var xhr=new XMLHttpRequest();
+    xhr.upload.addEventListener('progress',function(e){if(!e.lengthComputable)return;
+        var p=Math.round(e.loaded/e.total*100);upOv(p);olStatus.textContent=fB(e.loaded)+' / '+fB(e.total)});
+    xhr.addEventListener('load',function(){isUploading=false;dz.classList.remove('busy');
+        var vid=null;try{vid=eVI(JSON.parse(xhr.responseText))}catch(e){}
+        if(!vid)vid=eVIT(xhr.responseText);
+        if(!vid){hideOv();showErr('Gagal mendapatkan video ID. Respons: '+(xhr.responseText||'').substring(0,200));return}
+        upOv(100);olStatus.textContent='Selesai!';
+        try{aH({id:vid,name:savedName})}catch(e){}
+        var v=vid;setTimeout(function(){hideOv();showRes(v)},500)});
+    xhr.addEventListener('error',function(){isUploading=false;dz.classList.remove('busy');hideOv();showErr('Gagal terhubung ke server videy.co.')});
+    xhr.addEventListener('timeout',function(){isUploading=false;dz.classList.remove('busy');hideOv();showErr('Upload timeout — coba file lebih kecil.')});
+    xhr.open('POST','https://videy.co/api/upload');xhr.timeout=600000;xhr.send(fd)}
 
-    xhr.upload.addEventListener('progress',function(e){
-        if(!e.lengthComputable)return;
-        var p=Math.round(e.loaded/e.total*100);
-        pPct.textContent=p+'%';
-        pFill.style.width=p+'%';
-        if(p<30)pStatus.textContent='Mengupload video...';
-        else if(p<70)pStatus.textContent='Memproses di server...';
-        else pStatus.textContent='Hampir selesai...';
-    });
+/* ═══════ RESULT ═══════ */
+function mkLR(t,l,u){return'<div class="link-row"><span class="link-tag '+t+'">'+l+'</span>'
+    +'<span class="link-url">'+eH(u)+'</span><button class="btn-sm" data-copy="'+eA(u)+'" onclick="cpB(this)">'
+    +'<span class="iconify" data-icon="mdi:content-copy"></span> Salin</button></div>'}
+function showRes(id){var p='https://videy.co/v/?id='+id,c='https://cdn.videy.co/'+id+'.mp4',c2='https://cdn2.videy.co/'+id+'.mp4';
+    vid.src=c;linkRows.innerHTML='<div class="sec-title">Link Video</div>'+mkLR('page','Page',p)
+    +'<div class="sec-title">Link Direct CDN</div>'+mkLR('cdn','CDN',c)+mkLR('cdn2','CDN2',c2);
+    res.classList.add('show');setTimeout(function(){res.scrollIntoView({behavior:'smooth',block:'start'})},50)}
 
-    xhr.addEventListener('load',function(){
-        isUploading=false;
-        dz.classList.remove('busy');
+/* ═══════ COPY ═══════ */
+function cpB(b){doCp(b.getAttribute('data-copy'),b)}
+function doCp(t,b){var o=b.innerHTML;
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){cpOk(b,o)}).catch(function(){fbCp(t,b,o)});
+    else fbCp(t,b,o)}
+function cpOk(b,o){b.classList.add('ok');b.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
+    showToast('Link berhasil disalin!');setTimeout(function(){b.classList.remove('ok');b.innerHTML=o},2000)}
+function fbCp(t,b,o){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;left:-9999px';
+    document.body.appendChild(a);a.select();try{cpOk(b,o)}catch(e){showToast('Gagal menyalin','red')}document.body.removeChild(a)}
 
-        var videoId=null;
+/* ═══════ RESET ═══════ */
+function reset(){if(isUploading)return;currentFile=null;fi.value='';finfo.classList.remove('show');
+    res.classList.remove('show');err.classList.remove('show');vid.src='';dz.classList.remove('busy');
+    window.scrollTo({top:0,behavior:'smooth'})}
 
-        /* coba parse JSON */
-        try{
-            var d=JSON.parse(xhr.responseText);
-            videoId=extractId(d);
-        }catch(e){
-            /* bukan JSON, coba regex dari raw text */
-        }
-
-        /* fallback: regex dari raw text */
-        if(!videoId){
-            videoId=extractIdFromText(xhr.responseText);
-        }
-
-        if(!videoId){
-            prog.classList.remove('show');
-            showErr('Gagal mendapatkan video ID. Respons: '+(xhr.responseText||'').substring(0,200));
-            return;
-        }
-
-        /* selesai — tampilkan progress 100% */
-        pStatus.textContent='Upload selesai!';
-        pFill.style.width='100%';
-        pPct.textContent='100%';
-
-        /* simpan ke history — DI SINI try-catch agar tidak blokir showResult */
-        try{addToHistory(videoId,savedName)}catch(e){console.warn('History error:',e)}
-
-        /* tampilkan hasil */
-        var resultId=videoId; /* capture untuk closure */
-        setTimeout(function(){showResult(resultId)},300);
-    });
-
-    xhr.addEventListener('error',function(){
-        isUploading=false;
-        dz.classList.remove('busy');
-        prog.classList.remove('show');
-        showErr('Gagal terhubung ke server videy.co.');
-    });
-
-    xhr.addEventListener('timeout',function(){
-        isUploading=false;
-        dz.classList.remove('busy');
-        prog.classList.remove('show');
-        showErr('Upload timeout — coba file lebih kecil.');
-    });
-
-    xhr.open('POST','https://videy.co/api/upload');
-    xhr.timeout=600000;
-    xhr.send(fd);
-}
-
-function showResult(id){
-    prog.classList.remove('show');
-
-    var pageUrl='https://videy.co/v/?id='+id;
-    var cdnUrl='https://cdn.videy.co/'+id+'.mp4';
-    var cdn2Url='https://cdn2.videy.co/'+id+'.mp4';
-
-    uPage.textContent=pageUrl;
-    u1.textContent=cdnUrl;
-    u2.textContent=cdn2Url;
-    vid.src=cdnUrl;
-
-    res.classList.add('show');
-    setTimeout(function(){
-        res.scrollIntoView({behavior:'smooth',block:'start'});
-    },50);
-}
-
-/* ════════════════════
-   COPY
-   ════════════════════ */
-
-function copyEl(elId,btn){
-    var txt=document.getElementById(elId).textContent;
-    doCopy(txt,btn);
-}
-
-function copyTxt(txt,btn){
-    doCopy(txt,btn);
-}
-
-function doCopy(txt,btn){
-    var origHtml=btn.innerHTML;
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(txt).then(function(){
-            btn.classList.add('ok');
-            btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
-            showToast('Link berhasil disalin!');
-            setTimeout(function(){
-                btn.classList.remove('ok');
-                btn.innerHTML=origHtml;
-            },2000);
-        }).catch(function(){
-            fallbackCopy(txt,btn,origHtml);
-        });
-    }else{
-        fallbackCopy(txt,btn,origHtml);
-    }
-}
-
-function fallbackCopy(txt,btn,origHtml){
-    var ta=document.createElement('textarea');
-    ta.value=txt;
-    ta.style.cssText='position:fixed;left:-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    try{
-        document.execCommand('copy');
-        btn.classList.add('ok');
-        btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
-        showToast('Link berhasil disalin!');
-    }catch(e){
-        showToast('Gagal menyalin','red');
-    }
-    document.body.removeChild(ta);
-    setTimeout(function(){
-        btn.classList.remove('ok');
-        btn.innerHTML=origHtml;
-    },2000);
-}
-
-/* ════════════════════
-   RESET
-   ════════════════════ */
-
-function reset(){
-    if(isUploading)return;
-    currentFile=null;
-    fi.value='';
-    finfo.classList.remove('show');
-    prog.classList.remove('show');
-    res.classList.remove('show');
-    err.classList.remove('show');
-    pFill.style.width='0%';
-    pPct.textContent='0%';
-    vid.src='';
-    dz.classList.remove('busy');
-    window.scrollTo({top:0,behavior:'smooth'});
-}
-
-/* ════════════════════
-   EVENT LISTENERS
-   ════════════════════ */
-
+/* ═══════ EVENTS ═══════ */
 dz.addEventListener('click',function(){if(!isUploading)fi.click()});
-
-fi.addEventListener('change',function(e){
-    if(e.target.files&&e.target.files[0])pickFile(e.target.files[0]);
-});
-
-dz.addEventListener('dragover',function(e){
-    e.preventDefault();
-    if(!isUploading)dz.classList.add('over');
-});
-
+fi.addEventListener('change',function(e){if(e.target.files&&e.target.files[0])pickFile(e.target.files[0])});
+dz.addEventListener('dragover',function(e){e.preventDefault();if(!isUploading)dz.classList.add('over')});
 dz.addEventListener('dragleave',function(){dz.classList.remove('over')});
+dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('over');
+    if(e.dataTransfer.files&&e.dataTransfer.files[0]&&!isUploading)pickFile(e.dataTransfer.files[0])});
+fdel.addEventListener('click',function(){if(isUploading)return;currentFile=null;fi.value='';finfo.classList.remove('show');dz.classList.remove('busy')});
 
-dz.addEventListener('drop',function(e){
-    e.preventDefault();
-    dz.classList.remove('over');
-    if(e.dataTransfer.files&&e.dataTransfer.files[0]&&!isUploading){
-        pickFile(e.dataTransfer.files[0]);
-    }
-});
-
-fdel.addEventListener('click',function(){
-    if(isUploading)return;
-    currentFile=null;
-    fi.value='';
-    finfo.classList.remove('show');
-    dz.classList.remove('busy');
-});
-
-/* ════════════════════
-   INIT
-   ════════════════════ */
-try{renderHistory()}catch(e){}
+try{rH()}catch(e){}
 </script>
 </body>
 </html>

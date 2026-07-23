@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videy — Upload Video</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#08080d;--bg2:#0f0f17;--card:#161622;--card-h:#1e1e2e;
+            --border:#252538;--border-h:#353550;
+            --t1:#fff;--t2:#9494b0;--t3:#5c5c78;
+            --accent:#7c6aef;--accent-h:#9080f8;--accent-glow:rgba(124,106,239,.25);
+            --green:#2dd4a0;--green-glow:rgba(45,212,160,.15);
+            --blue:#60a5fa;--blue-glow:rgba(96,165,250,.12);
+            --red:#f06;--red-bg:rgba(255,0,102,.08);--red-border:rgba(255,0,102,.2);
+            --radius:14px;--radius-sm:10px;
+        }
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+        .bg-glow{position:fixed;inset:0;pointer-events:none;z-index:0;
+            background:radial-gradient(ellipse 60% 50% at 25% 40%,rgba(124,106,239,.07),transparent),
+                        radial-gradient(ellipse 50% 60% at 75% 70%,rgba(45,212,160,.05),transparent)}
+        .wrap{max-width:780px;margin:0 auto;padding:20px;position:relative;z-index:1}
+
+        header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);margin-bottom:40px}
+        .logo{font-size:26px;font-weight:700;letter-spacing:-.04em;
+            background:linear-gradient(135deg,var(--accent),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .logo-sub{font-size:12px;color:var(--t3);letter-spacing:.02em}
+
+        .drop-zone{border:2px dashed var(--border);border-radius:20px;padding:56px 32px;text-align:center;cursor:pointer;
+            background:var(--bg2);transition:all .35s ease;position:relative;overflow:hidden}
+        .drop-zone::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,106,239,.06),rgba(45,212,160,.03));opacity:0;transition:opacity .35s}
+        .drop-zone:hover,.drop-zone.over{border-color:var(--accent);background:var(--card)}
+        .drop-zone:hover::after,.drop-zone.over::after{opacity:1}
+        .drop-zone.busy{pointer-events:none;opacity:.5}
+        .dz-icon{width:60px;height:60px;margin:0 auto 18px;border-radius:16px;
+            background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;
+            color:#fff;font-size:26px;position:relative;z-index:1;transition:transform .35s}
+        .drop-zone:hover .dz-icon{transform:translateY(-3px) scale(1.05)}
+        .dz-title{font-size:19px;font-weight:600;margin-bottom:6px;position:relative;z-index:1}
+        .dz-sub{font-size:13px;color:var(--t2);position:relative;z-index:1}
+        .dz-sub b{color:var(--accent);font-weight:600}
+        .dz-formats{margin-top:14px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+        .fmt{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;background:var(--card-h);color:var(--t3);text-transform:uppercase;letter-spacing:.06em}
+        input[type=file]{display:none}
+
+        .finfo{display:none;align-items:center;gap:14px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);margin-top:18px}
+        .finfo.show{display:flex}
+        .finfo-icon{width:42px;height:42px;border-radius:var(--radius-sm);background:var(--card-h);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:20px;flex-shrink:0}
+        .finfo-body{flex:1;min-width:0}
+        .finfo-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .finfo-size{font-size:11px;color:var(--t3);margin-top:2px}
+        .finfo-del{width:30px;height:30px;border-radius:8px;border:none;background:transparent;color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .2s}
+        .finfo-del:hover{background:var(--red-bg);color:var(--red)}
+
+        .btn-sm{padding:7px 15px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);color:var(--t2);
+            font-family:inherit;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+        .btn-sm:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,106,239,.07)}
+        .btn-sm.ok{border-color:var(--green);color:var(--green);background:var(--green-glow)}
+
+        .prog{margin-top:22px;display:none}
+        .prog.show{display:block}
+        .prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+        .prog-lbl{font-size:12px;font-weight:500;color:var(--t2)}
+        .prog-pct{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+        .prog-bar{height:5px;background:var(--card-h);border-radius:3px;overflow:hidden}
+        .prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px;transition:width .25s ease}
+        .prog-status{margin-top:7px;font-size:11px;color:var(--t3)}
+
+        .err{display:none;align-items:center;gap:9px;padding:13px 16px;background:var(--red-bg);border:1px solid var(--red-border);
+            border-radius:var(--radius-sm);color:var(--red);font-size:12px;margin-top:18px;animation:fadeUp .3s ease}
+        .err.show{display:flex}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+        .result{display:none;margin-top:32px;animation:fadeUp .5s ease}
+        .result.show{display:block}
+        .player-wrap{border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--border)}
+        .player-wrap video{width:100%;display:block;max-height:480px;object-fit:contain;background:#000}
+        .sec-title{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin:24px 0 10px}
+
+        .link-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--border);
+            border-radius:var(--radius-sm);margin-bottom:8px;transition:all .2s}
+        .link-row:hover{border-color:var(--border-h);background:var(--card-h)}
+        .link-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:5px;flex-shrink:0;min-width:42px;text-align:center}
+        .link-tag.page{background:rgba(96,165,250,.14);color:var(--blue)}
+        .link-tag.cdn{background:rgba(124,106,239,.14);color:var(--accent)}
+        .link-tag.cdn2{background:var(--green-glow);color:var(--green)}
+        .link-url{flex:1;font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'SF Mono','Fira Code','Cascadia Code',monospace}
+
+        .embed-ta{width:100%;padding:13px 14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);
+            color:var(--t2);font-family:'SF Mono','Fira Code','Cascadia Code',monospace;font-size:11px;line-height:1.7;resize:none;outline:none;transition:border-color .2s}
+        .embed-ta:focus{border-color:var(--accent)}
+        .embed-actions{display:flex;justify-content:flex-end;margin-top:8px}
+
+        .again-wrap{margin-top:28px;text-align:center}
+        .btn-again{padding:12px 30px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg2);
+            color:var(--t2);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:8px}
+        .btn-again:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,106,239,.06);transform:translateY(-1px)}
+
+        .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);padding:11px 22px;
+            background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--t1);font-size:12px;font-weight:500;
+            display:flex;align-items:center;gap:7px;z-index:999;transition:transform .45s cubic-bezier(.16,1,.3,1);
+            box-shadow:0 14px 44px rgba(0,0,0,.45)}
+        .toast.show{transform:translateX(-50%) translateY(0)}
+        .toast .iconify{color:var(--green);font-size:17px}
+
+        footer{text-align:center;padding:36px 0 24px;color:var(--t3);font-size:11px}
+        footer a{color:var(--t2);text-decoration:none;transition:color .2s}
+        footer a:hover{color:var(--accent)}
+
+        @media(max-width:640px){
+            .wrap{padding:14px}
+            .drop-zone{padding:38px 18px}
+            .dz-title{font-size:17px}
+            .link-row{flex-wrap:wrap}
+            .link-url{width:100%;order:3}
+            .logo-sub{display:none}
+        }
+    </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="wrap">
+
+    <header>
+        <div class="logo">videy</div>
+        <div class="logo-sub">Video hosting sederhana</div>
+    </header>
+
+    <main>
+        <div class="drop-zone" id="dz">
+            <div class="dz-icon"><span class="iconify" data-icon="mdi:cloud-upload-outline"></span></div>
+            <div class="dz-title">Drag & drop video di sini</div>
+            <div class="dz-sub">atau <b>pilih file</b> — upload otomatis</div>
+            <div class="dz-formats">
+                <span class="fmt">MP4</span><span class="fmt">WEBM</span><span class="fmt">MOV</span><span class="fmt">AVI</span><span class="fmt">MKV</span>
+            </div>
+            <input type="file" id="fi" accept="video/*">
+        </div>
+
+        <div class="finfo" id="finfo">
+            <div class="finfo-icon"><span class="iconify" data-icon="mdi:filmstrip-box"></span></div>
+            <div class="finfo-body">
+                <div class="finfo-name" id="fname">—</div>
+                <div class="finfo-size" id="fsize">—</div>
+            </div>
+            <button class="finfo-del" id="fdel" title="Hapus"><span class="iconify" data-icon="mdi:close"></span></button>
+        </div>
+
+        <div class="prog" id="prog">
+            <div class="prog-top">
+                <span class="prog-lbl">Mengupload...</span>
+                <span class="prog-pct" id="pPct">0%</span>
+            </div>
+            <div class="prog-bar"><div class="prog-fill" id="pFill"></div></div>
+            <div class="prog-status" id="pStatus">Mempersiapkan upload...</div>
+        </div>
+
+        <div class="err" id="err">
+            <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
+            <span id="errTxt">Terjadi kesalahan</span>
+        </div>
+
+        <div class="result" id="res">
+            <div class="player-wrap">
+                <video id="vid" controls preload="metadata"></video>
+            </div>
+
+            <div class="sec-title">Link Video</div>
+            <div class="link-row">
+                <span class="link-tag page">Page</span>
+                <span class="link-url" id="uPage">—</span>
+                <button class="btn-sm" onclick="copyUrl('uPage',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
+            </div>
+
+            <div class="sec-title">Link Direct CDN</div>
+            <div class="link-row">
+                <span class="link-tag cdn">CDN</span>
+                <span class="link-url" id="u1">—</span>
+                <button class="btn-sm" onclick="copyUrl('u1',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
+            </div>
+            <div class="link-row">
+                <span class="link-tag cdn2">CDN2</span>
+                <span class="link-url" id="u2">—</span>
+                <button class="btn-sm" onclick="copyUrl('u2',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
+            </div>
+
+            <div class="sec-title">Kode Embed</div>
+            <textarea class="embed-ta" id="embed" rows="3" readonly></textarea>
+            <div class="embed-actions">
+                <button class="btn-sm" onclick="copyEmbed(this)"><span class="iconify" data-icon="mdi:code-tags"></span> Salin Embed</button>
+            </div>
+
+            <div class="again-wrap">
+                <button class="btn-again" onclick="reset()">
+                    <span class="iconify" data-icon="mdi:plus"></span> Upload Lagi
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>Powered by <a href="https://videy.co" target="_blank">videy.co</a> API</footer>
+</div>
+
+<div class="toast" id="toast">
+    <span class="iconify" data-icon="mdi:check-circle"></span>
+    <span id="toastTxt">Berhasil disalin!</span>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const dz=$('dz'),fi=$('fi'),finfo=$('finfo'),fname=$('fname'),fsize=$('fsize'),
+      fdel=$('fdel'),prog=$('prog'),pPct=$('pPct'),pFill=$('pFill'),
+      pStatus=$('pStatus'),err=$('err'),errTxt=$('errTxt'),res=$('res'),vid=$('vid'),
+      uPage=$('uPage'),u1=$('u1'),u2=$('u2'),embed=$('embed'),
+      toast=$('toast'),toastTxt=$('toastTxt');
+
+let file=null, uploading=false;
+
+const fmt=b=>{if(!b)return'0 B';const k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k));return(b/Math.pow(k,i)).toFixed(1)+' '+s[i]};
+function showToast(t){toastTxt.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2400)}
+function showErr(m){errTxt.textContent=m;err.classList.add('show');setTimeout(()=>err.classList.remove('show'),6000)}
+
+/* ── Ekstrak video ID dari respons API ── */
+function extractId(d){
+    /* Cek key langsung */
+    if(d.video_id)return d.video_id;
+    if(d.id&&typeof d.id==='string'&&d.id.length>4&&d.id.length<30)return d.id;
+    if(d.videoId)return d.videoId;
+
+    /* Cek dari URL yang ada di respons */
+    const vals=Object.values(d);
+    for(const v of vals){
+        if(typeof v!=='string')continue;
+        /* Pattern: .../LlPTRqyo1.mp4 atau ...?id=LlPTRqyo1 */
+        let m=v.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);
+        if(m)return m[1];
+        m=v.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
+        if(m)return m[1];
+    }
+    return null;
+}
+
+/* ── Pilih file → langsung upload ── */
+function pick(f){
+    if(!f)return;
+    if(!f.type.startsWith('video/'))return showErr('File harus berformat video.');
+    if(uploading)return;
+
+    file=f;
+    fname.textContent=f.name;
+    fsize.textContent=fmt(f.size);
+    finfo.classList.add('show');
+    err.classList.remove('show');
+    res.classList.remove('show');
+    dz.classList.add('busy');
+
+    /* Langsung upload */
+    doUpload();
+}
+
+function doUpload(){
+    if(!file||uploading)return;
+    uploading=true;
+
+    prog.classList.add('show');
+    pFill.style.width='0%';pPct.textContent='0%';
+    pStatus.textContent='Mempersiapkan upload...';
+
+    const fd=new FormData();
+    fd.append('file',file);
+
+    const xhr=new XMLHttpRequest();
+
+    xhr.upload.addEventListener('progress',e=>{
+        if(!e.lengthComputable)return;
+        const p=Math.round(e.loaded/e.total*100);
+        pPct.textContent=p+'%';
+        pFill.style.width=p+'%';
+        if(p<30)pStatus.textContent='Mengupload video...';
+        else if(p<70)pStatus.textContent='Memproses di server...';
+        else if(p<100)pStatus.textContent='Hampir selesai...';
+    });
+
+    xhr.addEventListener('load',()=>{
+        uploading=false;
+        dz.classList.remove('busy');
+
+        let videoId=null;
+
+        try{
+            const d=JSON.parse(xhr.responseText);
+            videoId=extractId(d);
+
+            if(!videoId){
+                /* Fallback: cari ID dari raw text */
+                const txt=xhr.responseText;
+                let m=txt.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/)||txt.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
+                videoId=m?m[1]:null;
+            }
+        }catch(_){
+            const txt=xhr.responseText;
+            const m=txt.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/)||txt.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
+            videoId=m?m[1]:null;
+        }
+
+        if(!videoId){
+            prog.classList.remove('show');
+            showErr('Gagal mendapatkan video ID dari server. Respons: '+(xhr.responseText||'').substring(0,250));
+            return;
+        }
+
+        pStatus.textContent='Upload selesai!';
+        pFill.style.width='100%';
+        pPct.textContent='100%';
+        setTimeout(()=>showResult(videoId),350);
+    });
+
+    xhr.addEventListener('error',()=>{
+        uploading=false;dz.classList.remove('busy');
+        prog.classList.remove('show');
+        showErr('Gagal terhubung ke server videy.co. Coba lagi.');
+    });
+    xhr.addEventListener('timeout',()=>{
+        uploading=false;dz.classList.remove('busy');
+        prog.classList.remove('show');
+        showErr('Upload timeout — coba file lebih kecil.');
+    });
+
+    xhr.open('POST','https://videy.co/api/upload');
+    xhr.timeout=600000;
+    xhr.send(fd);
+}
+
+function showResult(id){
+    prog.classList.remove('show');
+
+    const pageUrl='https://videy.co/v/?id='+id;
+    const cdnUrl='https://cdn.videy.co/'+id+'.mp4';
+    const cdn2Url='https://cdn2.videy.co/'+id+'.mp4';
+
+    uPage.textContent=pageUrl;
+    u1.textContent=cdnUrl;
+    u2.textContent=cdn2Url;
+    vid.src=cdnUrl;
+    embed.value='<video controls src="'+cdnUrl+'" style="max-width:100%"></video>';
+
+    res.classList.add('show');
+    res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── Events ── */
+dz.addEventListener('click',()=>{if(!uploading)fi.click()});
+fi.addEventListener('change',e=>{if(e.target.files[0])pick(e.target.files[0])});
+dz.addEventListener('dragover',e=>{e.preventDefault();if(!uploading)dz.classList.add('over')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');if(e.dataTransfer.files[0]&&!uploading)pick(e.dataTransfer.files[0])});
+
+fdel.addEventListener('click',()=>{
+    if(uploading)return;
+    file=null;fi.value='';
+    finfo.classList.remove('show');
+    dz.classList.remove('busy');
+});
+
+/* ── Copy ── */
+function copyUrl(id,btn){
+    const txt=$(id).textContent;
+    navigator.clipboard.writeText(txt).then(()=>{
+        btn.classList.add('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
+        showToast('Link berhasil disalin!');
+        setTimeout(()=>{btn.classList.remove('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:content-copy"></span> Salin'},2000);
+    });
+}
+function copyEmbed(btn){
+    navigator.clipboard.writeText(embed.value).then(()=>{
+        btn.classList.add('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
+        showToast('Kode embed berhasil disalin!');
+        setTimeout(()=>{btn.classList.remove('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:code-tags"></span> Salin Embed'},2000);
+    });
+}
+
+/* ── Reset ── */
+function reset(){
+    if(uploading)return;
+    file=null;fi.value='';finfo.classList.remove('show');
+    prog.classList.remove('show');res.classList.remove('show');err.classList.remove('show');
+    pFill.style.width='0%';pPct.textContent='0%';vid.src='';
+    dz.classList.remove('busy');
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

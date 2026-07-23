@@ -59,6 +59,7 @@
             font-family:inherit;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
         .btn-sm:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,106,239,.07)}
         .btn-sm.ok{border-color:var(--green);color:var(--green);background:var(--green-glow)}
+        .btn-sm.danger:hover{border-color:var(--red);color:var(--red);background:var(--red-bg)}
 
         .prog{margin-top:22px;display:none}
         .prog.show{display:block}
@@ -89,15 +90,51 @@
         .link-tag.cdn2{background:var(--green-glow);color:var(--green)}
         .link-url{flex:1;font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'SF Mono','Fira Code','Cascadia Code',monospace}
 
-        .embed-ta{width:100%;padding:13px 14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);
-            color:var(--t2);font-family:'SF Mono','Fira Code','Cascadia Code',monospace;font-size:11px;line-height:1.7;resize:none;outline:none;transition:border-color .2s}
-        .embed-ta:focus{border-color:var(--accent)}
-        .embed-actions{display:flex;justify-content:flex-end;margin-top:8px}
-
         .again-wrap{margin-top:28px;text-align:center}
         .btn-again{padding:12px 30px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg2);
             color:var(--t2);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:8px}
         .btn-again:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,106,239,.06);transform:translateY(-1px)}
+
+        /* ── History ── */
+        .history{margin-top:44px;padding-top:32px;border-top:1px solid var(--border)}
+        .history-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+        .history-title{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+        .history-title .iconify{color:var(--t3);font-size:18px}
+        .history-count{font-size:11px;color:var(--t3);background:var(--card);padding:3px 10px;border-radius:20px;font-weight:500}
+        .btn-clear{padding:6px 14px;border:1px solid var(--red-border);border-radius:8px;background:transparent;
+            color:var(--red);font-family:inherit;font-size:10px;font-weight:600;cursor:pointer;transition:all .2s;
+            text-transform:uppercase;letter-spacing:.06em;display:none;align-items:center;gap:5px}
+        .btn-clear.show{display:inline-flex}
+        .btn-clear:hover{background:var(--red-bg)}
+
+        .h-list{display:flex;flex-direction:column;gap:10px}
+        .h-empty{text-align:center;padding:36px 20px;color:var(--t3);font-size:13px}
+        .h-empty .iconify{font-size:32px;margin-bottom:10px;display:block;opacity:.4}
+
+        .h-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;transition:all .3s;animation:fadeUp .35s ease}
+        .h-card:hover{border-color:var(--border-h);background:var(--card-h)}
+        .h-card-top{display:flex;align-items:center;gap:12px;padding:14px 16px}
+        .h-thumb{width:72px;height:44px;border-radius:7px;background:#0a0a12;overflow:hidden;flex-shrink:0;position:relative}
+        .h-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+        .h-thumb .play-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(255,255,255,.5);opacity:.6}
+        .h-body{flex:1;min-width:0}
+        .h-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+        .h-time{font-size:11px;color:var(--t3)}
+        .h-actions{display:flex;gap:6px;flex-shrink:0}
+
+        .h-links{display:none;padding:0 16px 14px;border-top:1px solid var(--border);margin-top:0}
+        .h-links.show{display:block;padding-top:12px}
+        .h-link-row{display:flex;align-items:center;gap:8px;padding:7px 0}
+        .h-link-row .link-tag{font-size:9px;min-width:36px;padding:2px 7px}
+        .h-link-row .link-url{font-size:11px}
+        .h-link-row .btn-sm{padding:5px 10px;font-size:10px}
+
+        .h-toggle{padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:transparent;
+            color:var(--t2);font-family:inherit;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;
+            display:flex;align-items:center;gap:4px}
+        .h-toggle:hover{border-color:var(--accent);color:var(--accent)}
+        .h-toggle .iconify{font-size:13px;transition:transform .25s}
+        .h-toggle.open .iconify{transform:rotate(180deg)}
 
         .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);padding:11px 22px;
             background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--t1);font-size:12px;font-weight:500;
@@ -105,6 +142,7 @@
             box-shadow:0 14px 44px rgba(0,0,0,.45)}
         .toast.show{transform:translateX(-50%) translateY(0)}
         .toast .iconify{color:var(--green);font-size:17px}
+        .toast.red .iconify{color:var(--red)}
 
         footer{text-align:center;padding:36px 0 24px;color:var(--t3);font-size:11px}
         footer a{color:var(--t2);text-decoration:none;transition:color .2s}
@@ -114,9 +152,11 @@
             .wrap{padding:14px}
             .drop-zone{padding:38px 18px}
             .dz-title{font-size:17px}
-            .link-row{flex-wrap:wrap}
-            .link-url{width:100%;order:3}
+            .link-row,.h-link-row{flex-wrap:wrap}
+            .link-url,.h-link-row .link-url{width:100%;order:3}
             .logo-sub{display:none}
+            .h-card-top{flex-wrap:wrap}
+            .h-actions{width:100%;justify-content:flex-end;margin-top:4px}
         }
     </style>
 </head>
@@ -167,37 +207,43 @@
             <div class="player-wrap">
                 <video id="vid" controls preload="metadata"></video>
             </div>
-
             <div class="sec-title">Link Video</div>
             <div class="link-row">
                 <span class="link-tag page">Page</span>
                 <span class="link-url" id="uPage">—</span>
-                <button class="btn-sm" onclick="copyUrl('uPage',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
+                <button class="btn-sm" onclick="copyEl('uPage',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
             </div>
-
             <div class="sec-title">Link Direct CDN</div>
             <div class="link-row">
                 <span class="link-tag cdn">CDN</span>
                 <span class="link-url" id="u1">—</span>
-                <button class="btn-sm" onclick="copyUrl('u1',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
+                <button class="btn-sm" onclick="copyEl('u1',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
             </div>
             <div class="link-row">
                 <span class="link-tag cdn2">CDN2</span>
                 <span class="link-url" id="u2">—</span>
-                <button class="btn-sm" onclick="copyUrl('u2',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
+                <button class="btn-sm" onclick="copyEl('u2',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>
             </div>
-
-            <div class="sec-title">Kode Embed</div>
-            <textarea class="embed-ta" id="embed" rows="3" readonly></textarea>
-            <div class="embed-actions">
-                <button class="btn-sm" onclick="copyEmbed(this)"><span class="iconify" data-icon="mdi:code-tags"></span> Salin Embed</button>
-            </div>
-
             <div class="again-wrap">
                 <button class="btn-again" onclick="reset()">
                     <span class="iconify" data-icon="mdi:plus"></span> Upload Lagi
                 </button>
             </div>
+        </div>
+
+        <!-- ── History ── -->
+        <div class="history" id="histSection">
+            <div class="history-head">
+                <div class="history-title">
+                    <span class="iconify" data-icon="mdi:history"></span>
+                    Riwayat Upload
+                    <span class="history-count" id="histCount">0</span>
+                </div>
+                <button class="btn-clear" id="btnClear" onclick="clearAllHistory()">
+                    <span class="iconify" data-icon="mdi:delete-sweep"></span> Hapus Semua
+                </button>
+            </div>
+            <div class="h-list" id="hList"></div>
         </div>
     </main>
 
@@ -210,32 +256,207 @@
 </div>
 
 <script>
-const $=id=>document.getElementById(id);
-const dz=$('dz'),fi=$('fi'),finfo=$('finfo'),fname=$('fname'),fsize=$('fsize'),
-      fdel=$('fdel'),prog=$('prog'),pPct=$('pPct'),pFill=$('pFill'),
-      pStatus=$('pStatus'),err=$('err'),errTxt=$('errTxt'),res=$('res'),vid=$('vid'),
-      uPage=$('uPage'),u1=$('u1'),u2=$('u2'),embed=$('embed'),
-      toast=$('toast'),toastTxt=$('toastTxt');
+/* ── Shorthand ── */
+var $=function(id){return document.getElementById(id)};
+var dz=$('dz'),fi=$('fi'),finfo=$('finfo'),fname=$('fname'),fsize=$('fsize'),
+    fdel=$('fdel'),prog=$('prog'),pPct=$('pPct'),pFill=$('pFill'),
+    pStatus=$('pStatus'),err=$('err'),errTxt=$('errTxt'),res=$('res'),vid=$('vid'),
+    uPage=$('uPage'),u1=$('u1'),u2=$('u2'),
+    toastEl=$('toast'),toastTxt=$('toastTxt'),
+    hList=$('hList'),histCount=$('histCount'),btnClear=$('btnClear');
 
-let file=null, uploading=false;
+var currentFile=null;
+var isUploading=false;
+var STORAGE_KEY='videy_hist_v2';
 
-const fmt=b=>{if(!b)return'0 B';const k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k));return(b/Math.pow(k,i)).toFixed(1)+' '+s[i]};
-function showToast(t){toastTxt.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2400)}
-function showErr(m){errTxt.textContent=m;err.classList.add('show');setTimeout(()=>err.classList.remove('show'),6000)}
+/* ══════════════════════════════════════
+   HISTORY — semua dibungkus try-catch
+   supaya TIDAK PERNAH blokir flow utama
+   ══════════════════════════════════════ */
 
-/* ── Ekstrak video ID dari respons API ── */
-function extractId(d){
-    /* Cek key langsung */
-    if(d.video_id)return d.video_id;
-    if(d.id&&typeof d.id==='string'&&d.id.length>4&&d.id.length<30)return d.id;
-    if(d.videoId)return d.videoId;
+function getHistory(){
+    try{
+        var raw=localStorage.getItem(STORAGE_KEY);
+        if(!raw)return[];
+        var parsed=JSON.parse(raw);
+        if(!Array.isArray(parsed))return[];
+        /* filter hanya item yang valid */
+        return parsed.filter(function(item){
+            return item&&typeof item.id==='string'&&item.id.length>2;
+        });
+    }catch(e){return[]}
+}
 
-    /* Cek dari URL yang ada di respons */
-    const vals=Object.values(d);
-    for(const v of vals){
+function saveHistory(arr){
+    try{
+        if(arr.length>50)arr=arr.slice(0,50);
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(arr));
+    }catch(e){/* localStorage penuh atau disabled — abaikan */}
+}
+
+function addToHistory(id,name){
+    try{
+        var h=getHistory();
+        h.unshift({id:id,name:name||'video',ts:Date.now()});
+        saveHistory(h);
+        renderHistory();
+    }catch(e){console.warn('History save failed:',e)}
+}
+
+function removeHistory(ts){
+    try{
+        var h=getHistory().filter(function(i){return i.ts!==ts});
+        saveHistory(h);
+        renderHistory();
+        showToast('Dihapus dari riwayat','red');
+    }catch(e){}
+}
+
+function clearAllHistory(){
+    try{
+        saveHistory([]);
+        renderHistory();
+        showToast('Semua riwayat dihapus','red');
+    }catch(e){}
+}
+
+function renderHistory(){
+    try{
+        var h=getHistory();
+        histCount.textContent=h.length;
+        if(h.length>0){btnClear.classList.add('show')}else{btnClear.classList.remove('show')}
+
+        if(!h.length){
+            hList.innerHTML='<div class="h-empty"><span class="iconify" data-icon="mdi:video-off-outline"></span>Belum ada video diupload</div>';
+            return;
+        }
+
+        var html='';
+        for(var i=0;i<h.length;i++){
+            var item=h[i];
+            var vidId=item.id;
+            var pageU='https://videy.co/v/?id='+vidId;
+            var cdnU='https://cdn.videy.co/'+vidId+'.mp4';
+            var cdn2U='https://cdn2.videy.co/'+vidId+'.mp4';
+            var safeName=escHtml(item.name||'video');
+            var safeTime=timeAgo(item.ts);
+
+            html+='<div class="h-card" data-ts="'+item.ts+'">'
+                +'<div class="h-card-top">'
+                +'<div class="h-thumb">'
+                +'<video src="'+cdnU+'" preload="metadata" muted onloadeddata="this.currentTime=1"></video>'
+                +'<div class="play-icon"><span class="iconify" data-icon="mdi:play-circle"></span></div>'
+                +'</div>'
+                +'<div class="h-body">'
+                +'<div class="h-name">'+safeName+'</div>'
+                +'<div class="h-time">'+safeTime+'</div>'
+                +'</div>'
+                +'<div class="h-actions">'
+                +'<button class="h-toggle" onclick="toggleHLinks(this)">'
+                +'<span class="iconify" data-icon="mdi:chevron-down"></span> Link'
+                +'</button>'
+                +'<button class="btn-sm danger" onclick="removeHistory('+item.ts+')">'
+                +'<span class="iconify" data-icon="mdi:trash-can-outline"></span>'
+                +'</button>'
+                +'</div>'
+                +'</div>'
+                +'<div class="h-links">'
+                +'<div class="h-link-row">'
+                +'<span class="link-tag page">Page</span>'
+                +'<span class="link-url">'+pageU+'</span>'
+                +'<button class="btn-sm" onclick="copyTxt(\''+pageU+'\',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>'
+                +'</div>'
+                +'<div class="h-link-row">'
+                +'<span class="link-tag cdn">CDN</span>'
+                +'<span class="link-url">'+cdnU+'</span>'
+                +'<button class="btn-sm" onclick="copyTxt(\''+cdnU+'\',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>'
+                +'</div>'
+                +'<div class="h-link-row">'
+                +'<span class="link-tag cdn2">CDN2</span>'
+                +'<span class="link-url">'+cdn2U+'</span>'
+                +'<button class="btn-sm" onclick="copyTxt(\''+cdn2U+'\',this)"><span class="iconify" data-icon="mdi:content-copy"></span> Salin</button>'
+                +'</div>'
+                +'</div>'
+                +'</div>';
+        }
+        hList.innerHTML=html;
+    }catch(e){console.warn('History render failed:',e)}
+}
+
+function toggleHLinks(btn){
+    btn.classList.toggle('open');
+    var links=btn.closest('.h-card').querySelector('.h-links');
+    if(links.classList.contains('show')){links.classList.remove('show')}
+    else{links.classList.add('show')}
+}
+
+function escHtml(s){
+    var d=document.createElement('div');
+    d.textContent=s;
+    return d.innerHTML;
+}
+
+function timeAgo(ts){
+    try{
+        var diff=Date.now()-ts;
+        if(diff<0)diff=0;
+        var m=Math.floor(diff/60000);
+        if(m<1)return'Baru saja';
+        if(m<60)return m+' menit lalu';
+        var h=Math.floor(m/60);
+        if(h<24)return h+' jam lalu';
+        var d=Math.floor(h/24);
+        if(d<30)return d+' hari lalu';
+        return new Date(ts).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+    }catch(e){return''}
+}
+
+/* ════════════════════
+   UTILITAS UMUM
+   ════════════════════ */
+
+function formatBytes(b){
+    if(!b)return'0 B';
+    var k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k));
+    return(b/Math.pow(k,i)).toFixed(1)+' '+s[i];
+}
+
+function showToast(msg,type){
+    toastTxt.textContent=msg;
+    if(type==='red'){
+        toastEl.classList.add('red');
+        toastEl.querySelector('.iconify').setAttribute('data-icon','mdi:delete-outline');
+    }else{
+        toastEl.classList.remove('red');
+        toastEl.querySelector('.iconify').setAttribute('data-icon','mdi:check-circle');
+    }
+    toastEl.classList.add('show');
+    setTimeout(function(){toastEl.classList.remove('show')},2400);
+}
+
+function showErr(msg){
+    errTxt.textContent=msg;
+    err.classList.add('show');
+    setTimeout(function(){err.classList.remove('show')},6000);
+}
+
+/* ════════════════════
+   EKSTRAK VIDEO ID
+   ════════════════════ */
+
+function extractId(data){
+    if(!data)return null;
+    /* cek key langsung */
+    if(data.video_id)return data.video_id;
+    if(data.videoId)return data.videoId;
+    if(typeof data.id==='string'&&data.id.length>3&&data.id.length<30)return data.id;
+
+    /* scan semua value string */
+    var keys=Object.keys(data);
+    for(var i=0;i<keys.length;i++){
+        var v=data[keys[i]];
         if(typeof v!=='string')continue;
-        /* Pattern: .../LlPTRqyo1.mp4 atau ...?id=LlPTRqyo1 */
-        let m=v.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);
+        var m=v.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);
         if(m)return m[1];
         m=v.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
         if(m)return m[1];
@@ -243,88 +464,109 @@ function extractId(d){
     return null;
 }
 
-/* ── Pilih file → langsung upload ── */
-function pick(f){
+function extractIdFromText(txt){
+    if(!txt)return null;
+    var m=txt.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);
+    if(m)return m[1];
+    m=txt.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
+    return m?m[1]:null;
+}
+
+/* ════════════════════
+   UPLOAD FLOW
+   ════════════════════ */
+
+function pickFile(f){
     if(!f)return;
     if(!f.type.startsWith('video/'))return showErr('File harus berformat video.');
-    if(uploading)return;
+    if(isUploading)return;
 
-    file=f;
+    currentFile=f;
     fname.textContent=f.name;
-    fsize.textContent=fmt(f.size);
+    fsize.textContent=formatBytes(f.size);
     finfo.classList.add('show');
     err.classList.remove('show');
     res.classList.remove('show');
     dz.classList.add('busy');
 
-    /* Langsung upload */
-    doUpload();
+    startUpload();
 }
 
-function doUpload(){
-    if(!file||uploading)return;
-    uploading=true;
+function startUpload(){
+    if(!currentFile||isUploading)return;
+    isUploading=true;
 
     prog.classList.add('show');
-    pFill.style.width='0%';pPct.textContent='0%';
+    pFill.style.width='0%';
+    pPct.textContent='0%';
     pStatus.textContent='Mempersiapkan upload...';
 
-    const fd=new FormData();
-    fd.append('file',file);
+    var fd=new FormData();
+    fd.append('file',currentFile);
 
-    const xhr=new XMLHttpRequest();
+    /* simpan nama file sebelum XHR callback (karena currentFile bisa berubah) */
+    var savedName=currentFile.name;
 
-    xhr.upload.addEventListener('progress',e=>{
+    var xhr=new XMLHttpRequest();
+
+    xhr.upload.addEventListener('progress',function(e){
         if(!e.lengthComputable)return;
-        const p=Math.round(e.loaded/e.total*100);
+        var p=Math.round(e.loaded/e.total*100);
         pPct.textContent=p+'%';
         pFill.style.width=p+'%';
         if(p<30)pStatus.textContent='Mengupload video...';
         else if(p<70)pStatus.textContent='Memproses di server...';
-        else if(p<100)pStatus.textContent='Hampir selesai...';
+        else pStatus.textContent='Hampir selesai...';
     });
 
-    xhr.addEventListener('load',()=>{
-        uploading=false;
+    xhr.addEventListener('load',function(){
+        isUploading=false;
         dz.classList.remove('busy');
 
-        let videoId=null;
+        var videoId=null;
 
+        /* coba parse JSON */
         try{
-            const d=JSON.parse(xhr.responseText);
+            var d=JSON.parse(xhr.responseText);
             videoId=extractId(d);
+        }catch(e){
+            /* bukan JSON, coba regex dari raw text */
+        }
 
-            if(!videoId){
-                /* Fallback: cari ID dari raw text */
-                const txt=xhr.responseText;
-                let m=txt.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/)||txt.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
-                videoId=m?m[1]:null;
-            }
-        }catch(_){
-            const txt=xhr.responseText;
-            const m=txt.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/)||txt.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);
-            videoId=m?m[1]:null;
+        /* fallback: regex dari raw text */
+        if(!videoId){
+            videoId=extractIdFromText(xhr.responseText);
         }
 
         if(!videoId){
             prog.classList.remove('show');
-            showErr('Gagal mendapatkan video ID dari server. Respons: '+(xhr.responseText||'').substring(0,250));
+            showErr('Gagal mendapatkan video ID. Respons: '+(xhr.responseText||'').substring(0,200));
             return;
         }
 
+        /* selesai — tampilkan progress 100% */
         pStatus.textContent='Upload selesai!';
         pFill.style.width='100%';
         pPct.textContent='100%';
-        setTimeout(()=>showResult(videoId),350);
+
+        /* simpan ke history — DI SINI try-catch agar tidak blokir showResult */
+        try{addToHistory(videoId,savedName)}catch(e){console.warn('History error:',e)}
+
+        /* tampilkan hasil */
+        var resultId=videoId; /* capture untuk closure */
+        setTimeout(function(){showResult(resultId)},300);
     });
 
-    xhr.addEventListener('error',()=>{
-        uploading=false;dz.classList.remove('busy');
+    xhr.addEventListener('error',function(){
+        isUploading=false;
+        dz.classList.remove('busy');
         prog.classList.remove('show');
-        showErr('Gagal terhubung ke server videy.co. Coba lagi.');
+        showErr('Gagal terhubung ke server videy.co.');
     });
-    xhr.addEventListener('timeout',()=>{
-        uploading=false;dz.classList.remove('busy');
+
+    xhr.addEventListener('timeout',function(){
+        isUploading=false;
+        dz.classList.remove('busy');
         prog.classList.remove('show');
         showErr('Upload timeout — coba file lebih kecil.');
     });
@@ -337,60 +579,130 @@ function doUpload(){
 function showResult(id){
     prog.classList.remove('show');
 
-    const pageUrl='https://videy.co/v/?id='+id;
-    const cdnUrl='https://cdn.videy.co/'+id+'.mp4';
-    const cdn2Url='https://cdn2.videy.co/'+id+'.mp4';
+    var pageUrl='https://videy.co/v/?id='+id;
+    var cdnUrl='https://cdn.videy.co/'+id+'.mp4';
+    var cdn2Url='https://cdn2.videy.co/'+id+'.mp4';
 
     uPage.textContent=pageUrl;
     u1.textContent=cdnUrl;
     u2.textContent=cdn2Url;
     vid.src=cdnUrl;
-    embed.value='<video controls src="'+cdnUrl+'" style="max-width:100%"></video>';
 
     res.classList.add('show');
-    res.scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(function(){
+        res.scrollIntoView({behavior:'smooth',block:'start'});
+    },50);
 }
 
-/* ── Events ── */
-dz.addEventListener('click',()=>{if(!uploading)fi.click()});
-fi.addEventListener('change',e=>{if(e.target.files[0])pick(e.target.files[0])});
-dz.addEventListener('dragover',e=>{e.preventDefault();if(!uploading)dz.classList.add('over')});
-dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');if(e.dataTransfer.files[0]&&!uploading)pick(e.dataTransfer.files[0])});
+/* ════════════════════
+   COPY
+   ════════════════════ */
 
-fdel.addEventListener('click',()=>{
-    if(uploading)return;
-    file=null;fi.value='';
+function copyEl(elId,btn){
+    var txt=document.getElementById(elId).textContent;
+    doCopy(txt,btn);
+}
+
+function copyTxt(txt,btn){
+    doCopy(txt,btn);
+}
+
+function doCopy(txt,btn){
+    var origHtml=btn.innerHTML;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){
+            btn.classList.add('ok');
+            btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
+            showToast('Link berhasil disalin!');
+            setTimeout(function(){
+                btn.classList.remove('ok');
+                btn.innerHTML=origHtml;
+            },2000);
+        }).catch(function(){
+            fallbackCopy(txt,btn,origHtml);
+        });
+    }else{
+        fallbackCopy(txt,btn,origHtml);
+    }
+}
+
+function fallbackCopy(txt,btn,origHtml){
+    var ta=document.createElement('textarea');
+    ta.value=txt;
+    ta.style.cssText='position:fixed;left:-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try{
+        document.execCommand('copy');
+        btn.classList.add('ok');
+        btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
+        showToast('Link berhasil disalin!');
+    }catch(e){
+        showToast('Gagal menyalin','red');
+    }
+    document.body.removeChild(ta);
+    setTimeout(function(){
+        btn.classList.remove('ok');
+        btn.innerHTML=origHtml;
+    },2000);
+}
+
+/* ════════════════════
+   RESET
+   ════════════════════ */
+
+function reset(){
+    if(isUploading)return;
+    currentFile=null;
+    fi.value='';
+    finfo.classList.remove('show');
+    prog.classList.remove('show');
+    res.classList.remove('show');
+    err.classList.remove('show');
+    pFill.style.width='0%';
+    pPct.textContent='0%';
+    vid.src='';
+    dz.classList.remove('busy');
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ════════════════════
+   EVENT LISTENERS
+   ════════════════════ */
+
+dz.addEventListener('click',function(){if(!isUploading)fi.click()});
+
+fi.addEventListener('change',function(e){
+    if(e.target.files&&e.target.files[0])pickFile(e.target.files[0]);
+});
+
+dz.addEventListener('dragover',function(e){
+    e.preventDefault();
+    if(!isUploading)dz.classList.add('over');
+});
+
+dz.addEventListener('dragleave',function(){dz.classList.remove('over')});
+
+dz.addEventListener('drop',function(e){
+    e.preventDefault();
+    dz.classList.remove('over');
+    if(e.dataTransfer.files&&e.dataTransfer.files[0]&&!isUploading){
+        pickFile(e.dataTransfer.files[0]);
+    }
+});
+
+fdel.addEventListener('click',function(){
+    if(isUploading)return;
+    currentFile=null;
+    fi.value='';
     finfo.classList.remove('show');
     dz.classList.remove('busy');
 });
 
-/* ── Copy ── */
-function copyUrl(id,btn){
-    const txt=$(id).textContent;
-    navigator.clipboard.writeText(txt).then(()=>{
-        btn.classList.add('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
-        showToast('Link berhasil disalin!');
-        setTimeout(()=>{btn.classList.remove('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:content-copy"></span> Salin'},2000);
-    });
-}
-function copyEmbed(btn){
-    navigator.clipboard.writeText(embed.value).then(()=>{
-        btn.classList.add('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:check"></span> Disalin';
-        showToast('Kode embed berhasil disalin!');
-        setTimeout(()=>{btn.classList.remove('ok');btn.innerHTML='<span class="iconify" data-icon="mdi:code-tags"></span> Salin Embed'},2000);
-    });
-}
-
-/* ── Reset ── */
-function reset(){
-    if(uploading)return;
-    file=null;fi.value='';finfo.classList.remove('show');
-    prog.classList.remove('show');res.classList.remove('show');err.classList.remove('show');
-    pFill.style.width='0%';pPct.textContent='0%';vid.src='';
-    dz.classList.remove('busy');
-    window.scrollTo({top:0,behavior:'smooth'});
-}
+/* ════════════════════
+   INIT
+   ════════════════════ */
+try{renderHistory()}catch(e){}
 </script>
 </body>
 </html>

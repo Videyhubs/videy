@@ -3,723 +3,677 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Video Fast - URL Generator</title>
+<title>Video Fast — Upload & Generator</title>
 <link rel="icon" type="image/x-icon" href="https://videy.co/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../src/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-* { box-sizing: border-box; }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0f172a;color:#e2e8f0;font-family:'Poppins',-apple-system,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
 
-html, body {
-    margin: 0; padding: 0;
-    background: #0f172a;
-    color: #e2e8f0;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-}
+/* ═══ HEADER ═══ */
+.hdr{background:rgba(15,23,42,.85);backdrop-filter:blur(10px);border-bottom:1px solid #1e293b;padding:14px 0;position:sticky;top:0;z-index:100}
+.hdr-in{max-width:900px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.hdr-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-size:22px;letter-spacing:-.5px}
+.hdr-logo .bg{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.hdr-sub{font-size:12px;color:#64748b;letter-spacing:.02em}
+.hdr-back{color:#94a3b8;text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.hdr-back:hover{color:#fff}
 
-.gen-header {
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #1e293b;
-    padding: 14px 0; position: sticky; top: 0; z-index: 100;
-}
-.gen-header-inner {
-    max-width: 1100px; margin: 0 auto; padding: 0 20px;
-    display: flex; align-items: center; justify-content: space-between;
-}
-.gen-logo {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none; color: #fff;
-    font-weight: 700; font-size: 22px; letter-spacing: -0.5px;
-}
-.gen-logo .badge {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: #fff; padding: 4px 10px; border-radius: 8px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
-}
-.gen-back { color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-.gen-back:hover { color: #fff; }
+.wrap{max-width:900px;margin:0 auto;padding:36px 20px 80px}
 
-.gen-container { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
-.gen-hero { text-align: center; margin-bottom: 40px; }
-.gen-hero h1 {
-    font-size: 38px; font-weight: 700; margin: 0 0 12px;
-    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; line-height: 1.2;
-}
-.gen-hero p { color: #94a3b8; font-size: 15px; margin: 0; line-height: 1.6; }
+/* ═══ CARDS ═══ */
+.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.card-t{font-size:14px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.card-t::before{content:"";width:4px;height:16px;background:linear-gradient(180deg,#6366f1,#8b5cf6);border-radius:2px;display:inline-block}
+.card-t .fa{color:#64748b;font-size:13px}
 
-.gen-card {
-    background: #1e293b; border: 1px solid #334155;
-    border-radius: 16px; padding: 28px; margin-bottom: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-.gen-card-title {
-    font-size: 14px; font-weight: 600; color: #94a3b8;
-    text-transform: uppercase; letter-spacing: 1px; margin: 0 0 16px;
-    display: flex; align-items: center; gap: 8px;
-}
-.gen-card-title::before {
-    content: ""; width: 4px; height: 16px;
-    background: linear-gradient(180deg, #6366f1, #8b5cf6);
-    border-radius: 2px; display: inline-block;
-}
+/* ═══ BUTTONS ═══ */
+.btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:14px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .2s;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(99,102,241,.4)}
+.btn:active{transform:translateY(0)}
+.btn.sec{background:#334155;color:#e2e8f0}
+.btn.sec:hover{background:#475569;box-shadow:0 6px 20px rgba(51,65,85,.4)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-sm{padding:7px 14px;border:1px solid #334155;border-radius:8px;background:#0f172a;color:#94a3b8;font-family:inherit;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.btn-sm:hover{border-color:#6366f1;color:#6366f1;background:rgba(99,102,241,.07)}
+.btn-sm.ok{border-color:#16a34a;color:#16a34a;background:rgba(22,163,74,.1)}
+.btn-sm.danger{color:#64748b}.btn-sm.danger:hover{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.08)}
 
-.gen-input-group { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-.gen-input {
-    flex: 1; min-width: 240px;
-    background: #0f172a; border: 1px solid #334155; color: #e2e8f0;
-    padding: 14px 16px; border-radius: 10px;
-    font-size: 14px; font-family: 'JetBrains Mono', monospace;
-    transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-}
-.gen-input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
-.gen-input::placeholder { color: #475569; }
+/* ═══ INPUTS ═══ */
+.inp-grp{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.inp{flex:1;min-width:240px;background:#0f172a;border:1px solid #334155;color:#e2e8f0;padding:14px 16px;border-radius:10px;font-size:14px;font-family:'JetBrains Mono',monospace;transition:border-color .2s,box-shadow .2s;outline:none}
+.inp:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.inp::placeholder{color:#475569}
+.hint{color:#64748b;font-size:12px;margin:8px 0 0;line-height:1.5}
+.hint code{background:#0f172a;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;color:#94a3b8;font-size:11px}
 
-.gen-btn {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: #fff; border: none; padding: 14px 24px;
-    border-radius: 10px; font-size: 14px; font-weight: 600;
-    cursor: pointer; transition: transform 0.15s, box-shadow 0.2s;
-    font-family: inherit; display: inline-flex; align-items: center; gap: 8px;
-}
-.gen-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4); }
-.gen-btn:active { transform: translateY(0); }
-.gen-btn.secondary { background: #334155; color: #e2e8f0; }
-.gen-btn.secondary:hover { background: #475569; box-shadow: 0 6px 20px rgba(51, 65, 85, 0.4); }
-.gen-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+/* ═══ RESULT BOX ═══ */
+.res{margin-top:20px;display:none}
+.res.show{display:block}
+.res-item{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.res-label{color:#64748b;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;width:80px}
+.res-url{flex:1;min-width:200px;background:#1e293b;border:1px solid #334155;padding:10px 12px;border-radius:8px;color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-size:13px;word-break:break-all;user-select:all}
+.res-copy{background:#334155;color:#e2e8f0;border:none;padding:10px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s;flex-shrink:0;font-family:inherit}
+.res-copy:hover{background:#475569}
+.res-open{background:#16a34a;color:#fff;border:none;padding:10px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s;flex-shrink:0;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.res-open:hover{background:#15803d}
 
-.gen-hint { color: #64748b; font-size: 12px; margin: 8px 0 0; line-height: 1.5; }
-.gen-hint code {
-    background: #0f172a; padding: 2px 6px; border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace; color: #94a3b8; font-size: 11px;
-}
+/* ═══ SHORTLINK ═══ */
+.sl-badge{color:#fff;padding:3px 10px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;flex-shrink:0}
+.sl-badge.landing{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.sl-desc{color:#94a3b8;font-size:12px}
+.sl-item{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;transition:border-color .2s}
+.sl-item:hover{border-color:#475569}
+.sl-item.empty{color:#475569;font-style:italic;justify-content:center;padding:24px 16px;text-align:center}
+.sl-url{flex:1;min-width:200px;background:#1e293b;border:1px solid #334155;padding:10px 12px;border-radius:8px;color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-size:13px;word-break:break-all;user-select:all;display:flex;align-items:center;gap:8px}
+.sl-url .emoji{color:#fbbf24;font-size:16px;letter-spacing:2px;flex-shrink:0}
+.sl-acts{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+.sl-acts button{background:#334155;color:#e2e8f0;border:none;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;display:inline-flex;align-items:center;gap:4px}
+.sl-acts button:hover{background:#475569;transform:translateY(-1px)}
+.sl-meta{color:#64748b;font-size:11px;margin-top:16px;line-height:1.5}
+.sl-status{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;margin-left:auto}
+.sl-status.loading{background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)}
+.sl-status.success{background:rgba(22,163,74,.1);color:#86efac;border:1px solid rgba(22,163,74,.2)}
+.sl-status.error{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2)}
+.divider{height:1px;background:#334155;margin:0}
 
-.gen-result { margin-top: 20px; display: none; }
-.gen-result.show { display: block; }
-.gen-result-item {
-    background: #0f172a; border: 1px solid #334155; border-radius: 12px;
-    padding: 16px; margin-bottom: 12px;
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-}
-.gen-result-label { color: #64748b; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; width: 80px; }
-.gen-result-url {
-    flex: 1; min-width: 200px;
-    background: #1e293b; border: 1px solid #334155; padding: 10px 12px;
-    border-radius: 8px; color: #e2e8f0;
-    font-family: 'JetBrains Mono', monospace; font-size: 13px;
-    word-break: break-all; user-select: all;
-}
-.gen-copy-btn { background: #334155; color: #e2e8f0; border: none; padding: 10px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; transition: background 0.2s; flex-shrink: 0; font-family: inherit; }
-.gen-copy-btn:hover { background: #475569; }
-.gen-open-btn {
-    background: #16a34a; color: #fff; border: none; padding: 10px 14px;
-    border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;
-    transition: background 0.2s; flex-shrink: 0; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 6px; font-family: inherit;
-}
-.gen-open-btn:hover { background: #15803d; }
+/* ═══ UPLOAD ═══ */
+.dz{border:2px dashed #334155;border-radius:20px;padding:48px 28px;text-align:center;cursor:pointer;background:#0f172a;transition:all .35s;position:relative;overflow:hidden}
+.dz::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(139,92,246,.03));opacity:0;transition:opacity .35s}
+.dz:hover,.dz.over{border-color:#6366f1;background:#1e293b}
+.dz:hover::after,.dz.over::after{opacity:1}
+.dz.busy{pointer-events:none;opacity:.5}
+.dz-icon{width:56px;height:56px;margin:0 auto 16px;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;position:relative;z-index:1;transition:transform .35s}
+.dz:hover .dz-icon{transform:translateY(-3px) scale(1.05)}
+.dz-title{font-size:18px;font-weight:600;margin-bottom:6px;position:relative;z-index:1}
+.dz-sub{font-size:13px;color:#94a3b8;position:relative;z-index:1}
+.dz-sub b{color:#6366f1;font-weight:600}
+.dz-note{font-size:11px;color:#64748b;margin-top:10px;position:relative;z-index:1;opacity:.7}
+.dz-fmts{margin-top:12px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.fmt{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;background:#334155;color:#64748b;text-transform:uppercase;letter-spacing:.06em}
+input[type=file]{display:none}
+.finfo{display:none;align-items:center;gap:14px;padding:14px 18px;background:#0f172a;border:1px solid #334155;border-radius:10px;margin-top:16px}
+.finfo.show{display:flex}
+.finfo-ic{width:42px;height:42px;border-radius:10px;background:#334155;display:flex;align-items:center;justify-content:center;color:#6366f1;font-size:20px;flex-shrink:0}
+.finfo-body{flex:1;min-width:0}
+.finfo-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.finfo-size{font-size:11px;color:#64748b;margin-top:2px}
+.finfo-del{width:30px;height:30px;border-radius:8px;border:none;background:transparent;color:#64748b;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s}
+.finfo-del:hover{background:rgba(239,68,68,.08);color:#ef4444}
+.err-box{display:none;align-items:center;gap:9px;padding:13px 16px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;color:#ef4444;font-size:12px;margin-top:16px}
+.err-box.show{display:flex}
 
-.gen-divider { height: 1px; background: #334155; margin: 24px 0; border: none; }
-.gen-history { margin-top: 24px; }
-.gen-history-list { display: flex; flex-direction: column; gap: 10px; }
-.gen-history-item {
-    background: #0f172a; border: 1px solid #334155; border-radius: 10px;
-    padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
-    transition: border-color 0.2s;
-}
-.gen-history-item:hover { border-color: #475569; }
-.gen-history-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.gen-history-original { color: #64748b; font-family: 'JetBrains Mono', monospace; font-size: 12px; word-break: break-all; flex: 1; min-width: 200px; }
-.gen-history-code {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
-    border: 1px solid #4f46e5; color: #c7d2fe;
-    padding: 4px 10px; border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; word-break: break-all;
-}
-.gen-history-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-.gen-history-actions button, .gen-history-actions a {
-    background: #1e293b; color: #cbd5e1; border: 1px solid #334155;
-    padding: 6px 10px; border-radius: 6px;
-    font-size: 11px; font-weight: 500; cursor: pointer;
-    transition: all 0.2s; text-decoration: none; font-family: inherit;
-}
-.gen-history-actions button:hover, .gen-history-actions a:hover { background: #334155; color: #fff; }
-.gen-history-actions .del:hover { background: #b91c1c; border-color: #b91c1c; color: #fff; }
-.gen-empty { text-align: center; color: #475569; padding: 30px 0; font-size: 13px; font-style: italic; }
+/* ═══ UPLOAD OVERLAY ═══ */
+.ol{position:fixed;inset:0;background:rgba(15,23,42,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.ol.show{opacity:1;visibility:visible}
+.ol-wrap{position:relative;border-radius:28px;padding:2px}
+.ol-spin{position:absolute;inset:0;border-radius:28px;overflow:hidden;z-index:0}
+.ol-spin::before{content:'';position:absolute;top:50%;left:50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent 0%,#6366f1 12%,#8b5cf6 24%,transparent 36%,#16a34a 50%,#6366f1 62%,#8b5cf6 74%,transparent 88%);animation:olSpin 2s linear infinite;transform:translate(-50%,-50%)}
+@keyframes olSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.ol-card{position:relative;z-index:1;border-radius:26px;background:#1e293b;border:1px solid #334155;padding:44px 52px 40px;text-align:center;min-width:300px;transform:translateY(20px) scale(.95);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.ol.show .ol-card{transform:translateY(0) scale(1)}
+.ol-ring-wrap{position:relative;width:150px;height:150px;margin:0 auto 22px}
+.ol-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.2) 0%,transparent 65%);animation:olGlow 2s ease-in-out infinite;pointer-events:none}
+@keyframes olGlow{0%,100%{opacity:.35;transform:translate(-50%,-55%) scale(.85)}50%{opacity:.75;transform:translate(-50%,-55%) scale(1.15)}}
+.ol-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:36px;font-weight:700;letter-spacing:-.03em;background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-variant-numeric:tabular-nums}
+.ol-srv{display:inline-block;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;background:rgba(99,102,241,.15);color:#a5b4fc}
+.ol-fname{font-size:13px;font-weight:500;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px;margin-left:auto;margin-right:auto}
+.ol-status{font-size:12px;color:#64748b;font-variant-numeric:tabular-nums;min-height:18px}
 
-.gen-info {
-    background: rgba(99, 102, 241, 0.08);
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    color: #c7d2fe;
-    padding: 14px 16px; border-radius: 10px;
-    font-size: 13px; line-height: 1.6; margin-top: 16px;
-}
-.gen-info strong { color: #fff; }
+/* ═══ HISTORY ═══ */
+.hist-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.hist-title{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+.hist-title .fa{color:#64748b;font-size:16px}
+.hist-cnt{font-size:11px;color:#64748b;background:#0f172a;padding:3px 10px;border-radius:20px;font-weight:500}
+.btn-clear{padding:6px 14px;border:1px solid rgba(239,68,68,.2);border-radius:8px;background:transparent;color:#ef4444;font-family:inherit;font-size:10px;font-weight:600;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.06em;display:none;align-items:center;gap:5px}
+.btn-clear.show{display:inline-flex}
+.btn-clear:hover{background:rgba(239,68,68,.08)}
+.h-list{display:flex;flex-direction:column;gap:10px}
+.h-empty{text-align:center;padding:36px 20px;color:#475569;font-size:13px;font-style:italic}
+.h-card{background:#0f172a;border:1px solid #334155;border-radius:10px;overflow:hidden;transition:all .3s}
+.h-card:hover{border-color:#475569;background:rgba(15,23,42,.6)}
+.h-top{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.h-thumb{width:72px;height:44px;border-radius:7px;background:#0a0a12;overflow:hidden;flex-shrink:0;position:relative}
+.h-thumb video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.h-thumb .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(255,255,255,.5);opacity:.6}
+.h-body{flex:1;min-width:0}
+.h-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.h-time{font-size:11px;color:#64748b}
+.h-acts{display:flex;gap:6px;flex-shrink:0}
+.h-links{display:none;padding:0 16px 14px;border-top:1px solid #1e293b}
+.h-links.show{display:block;padding-top:12px}
+.h-link-row{display:flex;align-items:center;gap:8px;padding:7px 0}
+.link-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:5px;flex-shrink:0;min-width:42px;text-align:center}
+.link-tag.cdn{background:rgba(99,102,241,.14);color:#a5b4fc}
+.link-tag.cdn2{background:rgba(22,163,74,.14);color:#86efac}
+.link-tag.page{background:rgba(96,165,250,.14);color:#60a5fa}
+.link-url{flex:1;font-size:11px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'JetBrains Mono',monospace}
+.h-toggle{padding:6px 12px;border:1px solid #334155;border-radius:8px;background:transparent;color:#94a3b8;font-family:inherit;font-size:10px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
+.h-toggle:hover{border-color:#6366f1;color:#6366f1}
+.h-toggle .fa{font-size:11px;transition:transform .25s}
+.h-toggle.open .fa{transform:rotate(180deg)}
 
-/* SHORTLINK OUTPUT */
-.gen-shortlink-section { margin-bottom: 20px; }
-.gen-shortlink-section:last-of-type { margin-bottom: 0; }
-.gen-shortlink-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-.gen-shortlink-badge {
-    color: #fff; padding: 3px 10px; border-radius: 6px;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
-    flex-shrink: 0; transition: background 0.3s ease;
-}
-.gen-shortlink-badge.player { background: linear-gradient(135deg, #22c55e, #16a34a); }
-.gen-shortlink-badge.landing { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
-.gen-shortlink-desc { color: #94a3b8; font-size: 12px; }
-.gen-shortlink-wrap { display: flex; flex-direction: column; gap: 12px; }
-.gen-shortlink-item {
-    background: #0f172a; border: 1px solid #334155; border-radius: 12px;
-    padding: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-    transition: border-color 0.2s;
-}
-.gen-shortlink-item:hover { border-color: #475569; }
-.gen-shortlink-item.empty {
-    color: #475569; font-style: italic;
-    justify-content: center; padding: 24px 16px; text-align: center;
-}
-.gen-shortlink-label { color: #64748b; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; width: 80px; }
-.gen-shortlink-url {
-    flex: 1; min-width: 200px;
-    background: #1e293b; border: 1px solid #334155;
-    padding: 10px 12px; border-radius: 8px;
-    color: #e2e8f0; font-family: 'JetBrains Mono', monospace; font-size: 13px;
-    word-break: break-all; user-select: all;
-    display: flex; align-items: center; gap: 8px;
-}
-.gen-shortlink-url .emoji-prefix { color: #fbbf24; font-size: 16px; letter-spacing: 2px; flex-shrink: 0; }
-.gen-shortlink-actions { display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap; }
-.gen-shortlink-actions button {
-    background: #334155; color: #e2e8f0; border: none;
-    padding: 8px 12px; border-radius: 6px;
-    font-size: 11px; font-weight: 600; cursor: pointer;
-    transition: all 0.2s; font-family: inherit;
-    display: inline-flex; align-items: center; gap: 4px;
-}
-.gen-shortlink-actions button:hover { background: #475569; transform: translateY(-1px); }
-.gen-shortlink-actions button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.gen-shortlink-spinner {
-    width: 16px; height: 16px;
-    border: 2px solid #334155; border-top: 2px solid #6366f1;
-    border-radius: 50%; animation: vplSpin 0.8s linear infinite; flex-shrink: 0;
-}
-@keyframes vplSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.gen-shortlink-meta { color: #64748b; font-size: 11px; margin-top: 16px; line-height: 1.5; }
-.gen-shortlink-meta code {
-    background: #0f172a; padding: 2px 6px; border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace; color: #94a3b8; font-size: 10px;
-}
-.gen-shortlink-status {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 10px; border-radius: 6px;
-    font-size: 11px; font-weight: 600; margin-left: auto;
-}
-.gen-shortlink-status.loading { background: rgba(99, 102, 241, 0.1); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.2); }
-.gen-shortlink-status.success { background: rgba(22, 163, 74, 0.1); color: #86efac; border: 1px solid rgba(22, 163, 74, 0.2); }
-.gen-shortlink-status.error { background: rgba(220, 38, 38, 0.1); color: #fca5a5; border: 1px solid rgba(220, 38, 38, 0.2); }
+/* Gen history inline shortlink */
+.sl-inline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sl-inline-url{flex:1;min-width:180px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#e2e8f0;word-break:break-all;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);padding:8px 12px;border-radius:8px}
+.sl-inline-acts{display:flex;gap:4px;flex-shrink:0}
+.sl-inline-acts button{background:#334155;color:#94a3b8;border:none;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.sl-inline-acts button:hover{background:#475569;color:#fff}
+.sl-inline-acts a{background:#16a34a;color:#fff;border:none;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;font-family:inherit}
+.sl-inline-acts a:hover{background:#15803d}
+.sl-loading{color:#64748b;font-size:11px;font-style:italic;display:flex;align-items:center;gap:6px}
+.spinner{width:16px;height:16px;border:2px solid #334155;border-top:2px solid #6366f1;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+.spinner.sm{width:12px;height:12px;border-width:1.5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-.gen-toast {
-    position: fixed; bottom: 24px; left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: #16a34a; color: #fff;
-    padding: 12px 24px; border-radius: 10px;
-    font-size: 14px; font-weight: 500;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.25s, transform 0.25s; z-index: 9999;
-}
-.gen-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-.gen-toast.error { background: #dc2626; }
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e293b;border:1px solid #334155;padding:12px 24px;border-radius:12px;color:#e2e8f0;font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;z-index:200;transition:transform .45s cubic-bezier(.16,1,.3,1);box-shadow:0 14px 44px rgba(0,0,0,.45)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .fa-ok{color:#16a34a}
+.toast .fa-err{color:#ef4444}
 
-@media (max-width: 640px) {
-    .gen-hero h1 { font-size: 28px; }
-    .gen-card { padding: 20px; }
-    .gen-input-group { flex-direction: column; }
-    .gen-input, .gen-btn { width: 100%; }
-    .gen-result-label, .gen-shortlink-label { width: 100%; }
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:640px){
+    .wrap{padding:14px}.card{padding:20px}.inp-grp{flex-direction:column}.inp,.btn{width:100%}
+    .res-label,.res-label-sl{width:100%}.dz{padding:36px 18px}.dz-title{font-size:16px}
+    .sl-inline{flex-direction:column;align-items:stretch}
+    .sl-inline-acts{justify-content:stretch}
+    .sl-inline-acts button,.sl-inline-acts a{flex:1;text-align:center}
+    .h-top{flex-wrap:wrap}.h-acts{width:100%;justify-content:flex-end;margin-top:4px}
+    .ol-card{padding:36px 28px 32px;min-width:auto;margin:0 16px}
+    .hdr-sub{display:none}.link-url{width:100%;order:3}
 }
 </style>
 </head>
 <body>
 
-<header class="gen-header">
-    <div class="gen-header-inner">
-        <a href="../" class="gen-logo">
+<header class="hdr">
+    <div class="hdr-in">
+        <a href="../g/" class="hdr-logo">
             <span>Video Fast</span>
-            <span class="badge">Generator</span>
+            <span class="bg">Upload & Gen</span>
         </a>
-        <a href="../g/" class="gen-back">&larr; Kembali ke Beranda</a>
+        <span class="hdr-sub">Upload video, generate URL & shortlink otomatis</span>
     </div>
 </header>
 
-<main class="gen-container">
-    <!-- ENCODE SECTION -->
-    <div class="gen-card">
-        <h2 class="gen-card-title">Generate Kode</h2>
-        <div class="gen-input-group">
-            <input type="text" id="encodeInput" class="gen-input"
-                placeholder="Paste URL player, URL CDN langsung, atau ID"
-                autocomplete="off" spellcheck="false">
-            <button class="gen-btn" id="encodeBtn" onclick="generateCode()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18l7-5 7 5V3z"/></svg>
-                Generate
-            </button>
+<div class="wrap">
+
+<!-- ═══ UPLOAD ═══ -->
+<div class="card">
+    <h2 class="card-t"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Video</h2>
+    <div class="dz" id="dz">
+        <div class="dz-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+        <div class="dz-title">Drag & drop video di sini</div>
+        <div class="dz-sub">atau <b>pilih file</b> — upload otomatis ke videy.co</div>
+        <div class="dz-note">Maksimal 100MB · Hasil upload otomatis masuk ke generator</div>
+        <div class="dz-fmts">
+            <span class="fmt">MP4</span><span class="fmt">WEBM</span><span class="fmt">MOV</span><span class="fmt">AVI</span><span class="fmt">MKV</span>
         </div>
-        <p class="gen-hint">
-            Dukung: URL player <code>?id=...</code>, URL CDN langsung
-            (<code>cdn.videy.co</code>, <code>cdn.aceimg.com</code>, <code>cdn.xfree.com</code>,
-            <code>xxxfollow.com</code>, <code>xgroovy.com</code>, <code>qu.ax</code>, dll),
-            atau ID/path mentah.
-        </p>
-        <div class="gen-result" id="encodeResult">
-            <div class="gen-result-item">
-                <span class="gen-result-label">URL</span>
-                <div class="gen-result-url" id="resultUrl">-</div>
-                <button class="gen-copy-btn" onclick="copyResult()">Copy</button>
-                <a class="gen-open-btn" id="openBtn" href="#" target="_blank">Buka</a>
-            </div>
+        <input type="file" id="fi" accept="video/*">
+    </div>
+    <div class="finfo" id="finfo">
+        <div class="finfo-ic"><i class="fa-solid fa-film"></i></div>
+        <div class="finfo-body">
+            <div class="finfo-name" id="fname">—</div>
+            <div class="finfo-size" id="fsize">—</div>
+        </div>
+        <button class="finfo-del" id="fdel" title="Hapus"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="err-box" id="errBox">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="errTxt">Terjadi kesalahan</span>
+    </div>
+</div>
+
+<!-- ═══ GENERATE ═══ -->
+<div class="card">
+    <h2 class="card-t"><i class="fa-solid fa-bolt"></i> Generate Kode</h2>
+    <div class="inp-grp">
+        <input type="text" id="encodeInput" class="inp"
+            placeholder="Paste URL CDN, URL player, atau ID"
+            autocomplete="off" spellcheck="false">
+        <button class="btn" id="encodeBtn">
+            <i class="fa-solid fa-bolt"></i> Generate
+        </button>
+    </div>
+    <p class="hint">
+        URL otomatis terisi dari upload. Juga dukung paste manual:
+        <code>cdn.videy.co</code>, <code>cdn.aceimg.com</code>, <code>?id=...</code>, dll.
+    </p>
+    <div class="res" id="encodeResult">
+        <div class="res-item">
+            <span class="res-label">URL</span>
+            <div class="res-url" id="resultUrl">-</div>
+            <button class="res-copy" id="copyResultBtn">Copy</button>
+            <a class="res-open" id="openBtn" href="#" target="_blank">Buka</a>
         </div>
     </div>
+</div>
 
-    <!-- SHORTLINK OUTPUT -->
-    <div class="gen-card">
-        <h2 class="gen-card-title">Safelink / Shortlink Output</h2>
+<!-- ═══ SHORTLINK ═══ -->
+<div class="card">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <h2 class="card-t" style="margin:0"><i class="fa-solid fa-link"></i> Safelink Output</h2>
+        <span class="sl-badge landing" id="slBadge">Landing</span>
+        <span class="sl-desc" id="slDesc">lynqo.biz.id</span>
+        <span class="sl-status" id="slStatus" style="display:none"></span>
+    </div>
+    <div id="slWrap">
+        <div class="sl-item empty">Generate kode di atas, lalu shortlink akan otomatis dibuat di sini.</div>
+    </div>
+    <div class="sl-meta">Domain dipilih acak antara lynqo.biz.id dan tcoco.biz.id setiap generate.</div>
+    <div style="margin-top:14px">
+        <button class="btn sec" id="regenBtn" disabled style="font-size:12px;padding:10px 16px">
+            <i class="fa-solid fa-rotate"></i> Generate Ulang Shortlink
+        </button>
+    </div>
+</div>
 
-        <div class="gen-shortlink-section">
-            <div class="gen-shortlink-header">
-                <span class="gen-shortlink-badge player" id="slot0Badge">Player</span>
-                <span class="gen-shortlink-desc" id="slot0Desc">lynqo.biz.id &mdash; langsung ke video</span>
-                <span class="gen-shortlink-status" id="slot0Status" style="display:none;"></span>
+<!-- ═══ RIWAYAT GENERATE ═══ -->
+<div class="card">
+    <div class="hist-head">
+        <div class="hist-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Generate <span class="hist-cnt" id="genCount">0</span></div>
+        <button class="btn-clear" id="clearGenBtn"><i class="fa-solid fa-trash-can"></i> Hapus Semua</button>
+    </div>
+    <div class="h-list" id="genList">
+        <div class="h-empty">Belum ada riwayat generate.</div>
+    </div>
+</div>
+
+<!-- ═══ RIWAYAT UPLOAD ═══ -->
+<div class="card">
+    <div class="hist-head">
+        <div class="hist-title"><i class="fa-solid fa-cloud-arrow-up"></i> Riwayat Upload <span class="hist-cnt" id="upCount">0</span></div>
+        <button class="btn-clear" id="clearUpBtn"><i class="fa-solid fa-trash-can"></i> Hapus Semua</button>
+    </div>
+    <div class="h-list" id="upList">
+        <div class="h-empty">Belum ada video diupload.</div>
+    </div>
+</div>
+
+</div>
+
+<!-- ═══ UPLOAD OVERLAY ═══ -->
+<div class="ol" id="ol">
+    <div class="ol-wrap">
+        <div class="ol-spin"></div>
+        <div class="ol-card">
+            <div class="ol-ring-wrap">
+                <div class="ol-glow"></div>
+                <svg width="150" height="150" viewBox="0 0 150 150" style="display:block;margin:0 auto;transform:rotate(-90deg)">
+                    <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#8b5cf6"/>
+                    </linearGradient></defs>
+                    <circle cx="75" cy="75" r="64" fill="none" stroke="#334155" stroke-width="6"/>
+                    <circle id="olRing" cx="75" cy="75" r="64" fill="none" stroke="url(#rg)" stroke-width="6" stroke-linecap="round"
+                        stroke-dasharray="402.12" stroke-dashoffset="402.12" style="transition:stroke-dashoffset .2s ease-out"/>
+                </svg>
+                <div class="ol-pct" id="olPct">0%</div>
             </div>
-            <div class="gen-shortlink-wrap" id="slot0Wrap">
-                <div class="gen-shortlink-item empty">Generate kode di atas, lalu shortlink akan otomatis dibuat di sini.</div>
-            </div>
-        </div>
-
-        <hr class="gen-divider">
-
-        <div class="gen-shortlink-section">
-            <div class="gen-shortlink-header">
-                <span class="gen-shortlink-badge landing" id="slot1Badge">Landing</span>
-                <span class="gen-shortlink-desc" id="slot1Desc">tcoco.biz.id &mdash; melewati landing page</span>
-                <span class="gen-shortlink-status" id="slot1Status" style="display:none;"></span>
-            </div>
-            <div class="gen-shortlink-wrap" id="slot1Wrap">
-                <div class="gen-shortlink-item empty">Generate kode di atas, lalu shortlink akan otomatis dibuat di sini.</div>
-            </div>
-        </div>
-
-        <div class="gen-shortlink-meta">
-            Dua shortlink dibuat secara acak: kadang lynqo = player &amp; tcoco = landing,
-            kadang sebaliknya. Masing-masing domain punya API &amp; database sendiri.
-        </div>
-
-        <div style="margin-top: 14px;">
-            <button class="gen-btn secondary" id="regenShortlinkBtn" onclick="regenerateShortlinks()" disabled style="font-size: 12px; padding: 10px 16px;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0 5-4 9-9 9s-9-4-9-9 4-9 9-9c2.5 0 4.7 1 6.4 2.6L21 8"/><path d="M21 3v5h-5"/></svg>
-                Generate Ulang Semua Shortlink
-            </button>
+            <div class="ol-srv">videy.co</div>
+            <div class="ol-fname" id="olFname">video.mp4</div>
+            <div class="ol-status" id="olStatus">Mempersiapkan upload...</div>
         </div>
     </div>
+</div>
 
-    <!-- HISTORY -->
-    <div class="gen-card gen-history">
-        <h2 class="gen-card-title">Riwayat Generate</h2>
-        <div class="gen-history-list" id="historyList">
-            <div class="gen-empty">Belum ada riwayat. Generate kode pertama Anda di atas.</div>
-        </div>
-        <div id="historyActions" style="margin-top: 14px; display: none;">
-            <button class="gen-btn secondary" onclick="clearHistory()" style="font-size: 12px; padding: 8px 14px;">
-                Hapus Semua Riwayat
-            </button>
-        </div>
-    </div>
-</main>
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check fa-ok" id="toastIcon"></i>
+    <span id="toastTxt">Berhasil!</span>
+</div>
 
-<div class="gen-toast" id="toast">Tersalin!</div>
-
-<!-- Config & Codec (load dulu, sync) -->
 <script src="../src/config.js"></script>
 <script src="../src/vidvast-codec.js"></script>
 
 <script>
-// =====================================================================
-// GENERATOR UI LOGIC
-// FIX UTAMA:
-// 1. SITE_BASE pakai VidvastConfig (bukan regex yang bisa salah)
-// 2. createShortLink pakai fetch + timeout + CORS fallback
-// 3. Error message jelas: bedakan CORS, network, server
-// 4. Pakai VidvastCodec dari file terpisah (konsisten dengan /v/ dan /d/)
-// =====================================================================
-(function () {
-    var HISTORY_KEY = 'vidvast_generator_history';
-    var SITE_BASE = (window.VidvastConfig && VidvastConfig.SITE_BASE) || (location.origin + '/');
+(function(){
+/* ═══════════════════════════════════════════════════════════
+   UTILITAS
+   ═══════════════════════════════════════════════════════════ */
+var CFG=window.VidvastConfig||{};
+var SITE_BASE=CFG.SITE_BASE||(location.origin+'/');
+var CIRC=402.12,MAX_SZ=100*1024*1024;
+var GEN_KEY='vidvast_generator_history',UP_KEY='videy_upload_history';
 
-    function $(id) { return document.getElementById(id); }
+function $(id){return document.getElementById(id)}
+function escH(s){var d=document.createElement('div');d.appendChild(document.createTextNode(String(s)));return d.innerHTML}
+function b64(s){try{return btoa(unescape(encodeURIComponent(s)))}catch(e){return''}}
+function db64(s){try{return decodeURIComponent(escape(atob(s)))}catch(e){return''}}
+function fmtB(b){if(!b)return'0 B';var k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k));return(b/Math.pow(k,i)).toFixed(1)+' '+s[i]}
+function timeAgo(ts){var d=Date.now()-ts;if(d<0)d=0;var m=Math.floor(d/60000);
+    if(m<1)return'Baru saja';if(m<60)return m+' menit lalu';var h=Math.floor(m/60);
+    if(h<24)return h+' jam lalu';var dd=Math.floor(h/24);if(dd<30)return dd+' hari lalu';
+    return new Date(ts).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}
 
-    function showToast(msg, isError) {
-        var t = $('toast');
-        t.textContent = msg;
-        t.classList.toggle('error', !!isError);
-        t.classList.add('show');
-        clearTimeout(showToast._t);
-        showToast._t = setTimeout(function () { t.classList.remove('show'); }, 2500);
-    }
+/* Toast */
+var _tt;
+function showToast(msg,isErr){
+    var t=$('toast'),ic=$('toastIcon'),tx=$('toastTxt');
+    tx.textContent=msg;
+    ic.className=isErr?'fa-solid fa-circle-xmark fa-err':'fa-solid fa-circle-check fa-ok';
+    t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){t.classList.remove('show')},2600);
+}
 
-    function loadHistory() {
-        try {
-            var raw = localStorage.getItem(HISTORY_KEY);
-            if (!raw) return [];
-            var arr = JSON.parse(raw);
-            return Array.isArray(arr) ? arr : [];
-        } catch (e) { return []; }
-    }
-    function saveHistory(list) {
-        try { localStorage.setItem(HISTORY_KEY, JSON.stringify(list)); } catch (e) {}
-    }
-    function addHistory(original, code) {
-        var list = loadHistory();
-        var filtered = list.filter(function (it) { return it.original !== original; });
-        filtered.unshift({ original: original, code: code, ts: Date.now() });
-        if (filtered.length > 50) filtered.length = 50;
-        saveHistory(filtered);
-        renderHistory();
-    }
-    function removeHistory(code) {
-        saveHistory(loadHistory().filter(function (it) { return it.code !== code; }));
-        renderHistory();
-    }
-    function escapeHtml(s) {
-        return String(s).replace(/[&<>"']/g, function (c) {
-            return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
-        });
-    }
-    function escapeAttr(s) {
-        return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-    }
-    function renderHistory() {
-        var list = loadHistory();
-        var container = $('historyList');
-        var actions = $('historyActions');
-        if (list.length === 0) {
-            container.innerHTML = '<div class="gen-empty">Belum ada riwayat. Generate kode pertama Anda di atas.</div>';
-            actions.style.display = 'none';
-            return;
-        }
-        actions.style.display = 'block';
-        container.innerHTML = list.map(function (it) {
-            var originalShort = it.original.length > 60 ? it.original.slice(0, 57) + '...' : it.original;
-            var url = SITE_BASE + 'v/?id=' + it.code;
-            return '<div class="gen-history-item">' +
-                '<div class="gen-history-row">' +
-                    '<div class="gen-history-original" title="' + escapeHtml(it.original) + '">' + escapeHtml(originalShort) + '</div>' +
-                    '<span class="gen-history-code">' + escapeHtml(it.code) + '</span>' +
-                '</div>' +
-                '<div class="gen-history-actions">' +
-                    '<a href="' + url + '" target="_blank">Buka</a>' +
-                    '<button onclick="copyText(\'' + escapeAttr(url) + '\')">Copy URL</button>' +
-                    '<button onclick="copyText(\'' + escapeAttr(it.code) + '\')">Copy Kode</button>' +
-                    '<button class="del" onclick="deleteHistory(\'' + escapeAttr(it.code) + '\')">Hapus</button>' +
-                '</div>' +
-            '</div>';
-        }).join('');
-    }
+/* Clipboard */
+function cpText(text){
+    if(!text){showToast('Tidak ada teks',true);return}
+    if(navigator.clipboard&&navigator.clipboard.writeText)
+        navigator.clipboard.writeText(text).then(function(){showToast('Tersalin!')}).catch(function(){fbCp(text)});
+    else fbCp(text);
+}
+function fbCp(text){var a=document.createElement('textarea');a.value=text;a.style.cssText='position:fixed;left:-9999px';
+    document.body.appendChild(a);a.select();try{showToast('Tersalin!')}catch(e){showToast('Gagal menyalin',true)}document.body.removeChild(a)}
 
-    window.generateCode = function () {
-        var raw = $('encodeInput').value;
-        if (!raw.trim()) { showToast('Isi dulu URL/ID-nya', true); return; }
-        var originalId = VidvastCodec.extractIdFromInput(raw);
-        if (!originalId) { showToast('Format tidak dikenali', true); return; }
-        var code = VidvastCodec.encode(originalId);
-        var url = SITE_BASE + 'v/?id=' + code;
-        $('resultUrl').textContent = url;
-        $('openBtn').href = url;
-        $('encodeResult').classList.add('show');
-        addHistory(originalId, code);
-        showToast('Kode berhasil dibuat');
-    };
-    window.copyResult = function () { copyText($('resultUrl').textContent); };
-    window.copyText = function (text) {
-        if (!text || text === '-') { showToast('Tidak ada teks', true); return; }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(function () { showToast('Tersalin!'); })
-                .catch(function () { fallbackCopy(text); });
-        } else { fallbackCopy(text); }
-    };
-    function fallbackCopy(text) {
-        var ta = document.createElement('textarea');
-        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); showToast('Tersalin!'); }
-        catch (e) { showToast('Gagal menyalin', true); }
-        document.body.removeChild(ta);
-    }
-    window.deleteHistory = function (code) { removeHistory(code); showToast('Riwayat dihapus'); };
-    window.clearHistory = function () {
-        if (!confirm('Hapus semua riwayat?')) return;
-        saveHistory([]); renderHistory(); showToast('Riwayat dikosongkan');
-    };
+/* ═══════════════════════════════════════════════════════════
+   UPLOAD MODULE
+   ═══════════════════════════════════════════════════════════ */
+var dz=$('dz'),fi=$('fi'),finfo=$('finfo'),fname=$('fname'),fsize=$('fsize'),
+    fdel=$('fdel'),errBox=$('errBox'),errTxt=$('errTxt'),
+    ol=$('ol'),olRing=$('olRing'),olPct=$('olPct'),olFname=$('olFname'),olStatus=$('olStatus');
+var curFile=null,isUploading=false;
 
-    $('encodeInput').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') { e.preventDefault(); generateCode(); }
+function showOl(n){olFname.textContent=n;olPct.textContent='0%';olRing.style.strokeDashoffset=CIRC;
+    olStatus.textContent='Mempersiapkan upload...';ol.classList.add('show')}
+function hideOl(){ol.classList.remove('show')}
+function upOl(p){olPct.textContent=p+'%';olRing.style.strokeDashoffset=CIRC*(1-p/100)}
+function showErr(m){errTxt.textContent=m;errBox.classList.add('show');setTimeout(function(){errBox.classList.remove('show')},6000)}
+
+/* Upload History */
+function gUH(){try{var r=localStorage.getItem(UP_KEY);if(!r)return[];var a=JSON.parse(r);
+    return Array.isArray(a)?a.filter(function(i){return i&&i.id&&i.id.length>2}):[]}catch(e){return[]}}
+function sUH(a){try{if(a.length>50)a=a.slice(0,50);localStorage.setItem(UP_KEY,JSON.stringify(a))}catch(e){}}
+function addUH(item){if(!item.ts)item.ts=Date.now();var h=gUH();h.unshift(item);sUH(h);rUH()}
+function rmUH(ts){sUH(gUH().filter(function(i){return i.ts!==ts}));rUH();showToast('Dihapus dari riwayat')}
+
+function rUH(){
+    var h=gUH(),el=$('upList'),cnt=$('upCount'),clr=$('clearUpBtn');
+    cnt.textContent=h.length;
+    if(h.length>0)clr.classList.add('show');else clr.classList.remove('show');
+    if(!h.length){el.innerHTML='<div class="h-empty">Belum ada video diupload.</div>';return}
+    var html='';
+    for(var i=0;i<h.length;i++){
+        var it=h[i],v=it.id;
+        html+='<div class="h-card" data-uts="'+it.ts+'"><div class="h-top">'
+            +'<div class="h-thumb"><video src="https://cdn.videy.co/'+escH(v)+'.mp4" preload="metadata" muted onloadeddata="this.currentTime=1"></video>'
+            +'<div class="play"><i class="fa-solid fa-play"></i></div></div>'
+            +'<div class="h-body"><div class="h-name">'+escH(it.name||'video')+'</div><div class="h-time">'+timeAgo(it.ts)+'</div></div>'
+            +'<div class="h-acts">'
+            +'<button class="h-toggle" data-utog><i class="fa-solid fa-chevron-down"></i> Link</button>'
+            +'<button class="btn-sm danger" data-udel="'+it.ts+'"><i class="fa-solid fa-trash-can"></i></button>'
+            +'</div></div>'
+            +'<div class="h-links">'
+            +mkULR('cdn','CDN','https://cdn.videy.co/'+v+'.mp4',v)
+            +mkULR('cdn2','CDN2','https://cdn2.videy.co/'+v+'.mp4',v)
+            +mkULR('page','Page','https://videy.co/v/?id='+v,v)
+            +'</div></div>';
+    }
+    el.innerHTML=html;
+}
+function mkULR(t,l,u,vid){
+    return'<div class="h-link-row"><span class="link-tag '+t+'">'+l+'</span>'
+        +'<span class="link-url">'+escH(u)+'</span>'
+        +'<button class="btn-sm" data-ucp="'+b64(u)+'"><i class="fa-solid fa-copy"></i> Salin</button>'
+        +'<button class="btn-sm" data-uuse="'+b64(u)+'"><i class="fa-solid fa-arrow-right"></i> Use</button>'
+        +'</div>';
+}
+
+/* Upload events delegation */
+ $('upList').addEventListener('click',function(e){
+    var tog=e.target.closest('[data-utog]');
+    if(tog){tog.classList.toggle('open');var lnk=tog.closest('.h-card').querySelector('.h-links');
+        if(lnk.classList.contains('show'))lnk.classList.remove('show');else lnk.classList.add('show');return}
+    var del=e.target.closest('[data-udel]');
+    if(del){rmUH(parseInt(del.getAttribute('data-udel'),10));return}
+    var cp=e.target.closest('[data-ucp]');
+    if(cp){cpText(db64(cp.getAttribute('data-ucp')));return}
+    var use=e.target.closest('[data-uuse]');
+    if(use){var url=db64(use.getAttribute('data-uuse'));
+        $('encodeInput').value=url;
+        $('encodeInput').scrollIntoView({behavior:'smooth',block:'center'});
+        showToast('CDN URL diisi ke generator');return}
+});
+
+ $('clearUpBtn').addEventListener('click',function(){sUH([]);rUH();showToast('Riwayat upload dikosongkan')});
+
+/* Upload logic */
+function pickFile(f){
+    if(!f)return;if(!f.type.startsWith('video/'))return showErr('File harus berformat video.');
+    if(isUploading)return;if(f.size>MAX_SZ)return showErr('File terlalu besar! Maks 100MB. File ini '+fmtB(f.size)+'.');
+    curFile=f;fname.textContent=f.name;fsize.textContent=fmtB(f.size);
+    finfo.classList.add('show');errBox.classList.remove('show');dz.classList.add('busy');
+    showOl(f.name);doUpload();
+}
+function doUpload(){
+    if(!curFile||isUploading)return;isUploading=true;
+    var fd=new FormData(),savedName=curFile.name;fd.append('file',curFile);
+    var xhr=new XMLHttpRequest();
+    xhr.upload.addEventListener('progress',function(e){if(!e.lengthComputable)return;
+        var p=Math.round(e.loaded/e.total*100);upOl(p);olStatus.textContent=fmtB(e.loaded)+' / '+fmtB(e.total)});
+    xhr.addEventListener('load',function(){
+        isUploading=false;dz.classList.remove('busy');
+        var vid=null;try{var d=JSON.parse(xhr.responseText);
+            if(d.video_id)vid=d.video_id;else if(d.videoId)vid=d.videoId;else if(typeof d.id==='string'&&d.id.length>3)vid=d.id;
+            if(!vid){var keys=Object.keys(d);for(var i=0;i<keys.length;i++){var v=d[keys[i]];if(typeof v!=='string')continue;
+                var m=v.match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);if(m){vid=m[1];break}m=v.match(/[?&]id=([A-Za-z0-9_-]{6,20})/);if(m){vid=m[1];break}}}
+        }catch(e){}
+        if(!vid){var m2=(xhr.responseText||'').match(/\/([A-Za-z0-9_-]{6,20})\.mp4/);if(m2)vid=m2[1]}
+        if(!vid){hideOl();showErr('Gagal mendapatkan video ID dari respons server.');return}
+        upOl(100);olStatus.textContent='Selesai!';
+        try{addUH({id:vid,name:savedName})}catch(e){}
+        var cdnUrl='https://cdn.videy.co/'+vid+'.mp4';
+        setTimeout(function(){hideOl();
+
+            // HIDE upload card setelah berhasil
+            var uploadCard = document.querySelector('.card');
+            if (uploadCard) uploadCard.style.display = 'none';
+
+            $('encodeInput').value=cdnUrl;
+            showToast('Upload berhasil! URL otomatis diisi ke generator');
+            // Auto-generate setelah upload
+            setTimeout(function(){doGenerate()},400);
+        },500);
     });
+    xhr.addEventListener('error',function(){isUploading=false;dz.classList.remove('busy');hideOl();showErr('Gagal terhubung ke server videy.co.')});
+    xhr.addEventListener('timeout',function(){isUploading=false;dz.classList.remove('busy');hideOl();showErr('Upload timeout — coba file lebih kecil.')});
+    xhr.open('POST','https://videy.co/api/upload');xhr.timeout=600000;xhr.send(fd);
+}
 
-    renderHistory();
+/* Drop zone events */
+dz.addEventListener('click',function(){if(!isUploading)fi.click()});
+fi.addEventListener('change',function(e){if(e.target.files&&e.target.files[0])pickFile(e.target.files[0])});
+dz.addEventListener('dragover',function(e){e.preventDefault();if(!isUploading)dz.classList.add('over')});
+dz.addEventListener('dragleave',function(){dz.classList.remove('over')});
+dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('over');
+    if(e.dataTransfer.files&&e.dataTransfer.files[0]&&!isUploading)pickFile(e.dataTransfer.files[0])});
+fdel.addEventListener('click',function(){if(isUploading)return;curFile=null;fi.value='';finfo.classList.remove('show');dz.classList.remove('busy')});
 
-    // =================================================================
-    // DUAL SHORTLINK
-    // =================================================================
-    var DOMAINS = (window.VidvastConfig && VidvastConfig.SHORTLINK_DOMAINS) || [
-        { slotId: 'slot0', api: 'https://vidy.biz.id/apiku2.php',       domain: 'https://lynqo.biz.id' },
-        { slotId: 'slot1', api: 'https://vidy.biz.id/cpanel-api.php',  domain: 'https://tcoco.biz.id' }
-    ];
+/* ═══════════════════════════════════════════════════════════
+   GENERATOR MODULE
+   ═══════════════════════════════════════════════════════════ */
+var _gData=[];
+var gDomainPool=CFG.SHORTLINK_DOMAINS||[
+    {api:'https://vidy.biz.id/apiku2.php',domain:'https://lynqo.biz.id'},
+    {api:'https://vidy.biz.id/cpanel-api.php',domain:'https://tcoco.biz.id'}
+];
+var EMOJIS=['\uD83D\uDD12','\u25B6\uFE0F','\u25B6\uFE0F','\u23EF\uFE0F','\u25B6\uFE0F','\u23F8\uFE0F','\u23F9\uFE0F','\uD83D\uDC49','\uD83D\uDC47','\u261D\uFE0F','\uD83D\uDC48','\uD83D\uDC46','\u23E9','\u23EA','\uD83C\uDFE0','\uD83C\uDFAC','\uD83D\uDCF9','\uD83C\uDFDE\uFE0F','\u26A0\uFE0F','\u2757','\u2755','\u203C\uFE0F','\uD83D\uDCE2','\uD83D\uDD14','\uD83D\uDCE3'];
+function rndEmoji(){return EMOJIS[Math.floor(Math.random()*EMOJIS.length)]}
+function rndDomain(){return gDomainPool[Math.floor(Math.random()*gDomainPool.length)]}
+function rndCode(){return Math.random().toString(36).substring(2,7)}
+var lastCode='',FTIMEOUT=(CFG&&typeof CFG.fetchTimeoutMs==='number')?CFG.fetchTimeoutMs:12000;
 
-    var RANDOM_EMOJIS = [
-        '\uD83D\uDD1E','\uD83D\uDD1E','\uD83D\uDD1E','\uD83D\uDD1E','\uD83D\uDD1E',
-        '\u25B6\uFE0F','\u25B6\uFE0F','\u25B6\uFE0F','\u25B6\uFE0F',
-        '\u23FA\uFE0F','\u23FA\uFE0F','\u23FA\uFE0F',
-        '\u25B6\uFE0F','\u23F8\uFE0F','\u23F9\uFE0F',
-        '\uD83D\uDC49','\uD83D\uDC46','\uD83D\uDC47','\uD83D\uDC48','\u261D\uFE0F',
-        '\u25B6\uFE0F','\u23E9','\u23EA',
-        '\uD83C\uDFE5','\uD83C\uDFAC','\uD83D\uDCF9','\uD83D\uDCFD\uFE0F','\uD83C\uDFDE\uFE0F',
-        '\u26A0\uFE0F','\u2757','\u2755','\u203C\uFE0F',
-        '\uD83D\uDCE2','\uD83D\uDD14','\uD83D\uDCE3'
-    ];
-    function getRandomEmoji() { return RANDOM_EMOJIS[Math.floor(Math.random() * RANDOM_EMOJIS.length)]; }
-    function generateShortCode() { return Math.random().toString(36).substring(2, 7); }
+/* Gen History */
+function gGH(){try{var r=localStorage.getItem(GEN_KEY);if(!r)return[];var a=JSON.parse(r);return Array.isArray(a)?a:[]}catch(e){return[]}}
+function sGH(l){try{localStorage.setItem(GEN_KEY,JSON.stringify(l))}catch(e){}}
+function addGH(raw,code){var l=gGH(),f=l.filter(function(i){return i.raw!==raw});
+    f.unshift({raw:raw,code:code,shortlink:null,slStatus:'pending',ts:Date.now()});
+    if(f.length>50)f.length=50;sGH(f);rGH()}
+function upGH(code,sl,status){var l=gGH();for(var i=0;i<l.length;i++){if(l[i].code===code){l[i].shortlink=sl||null;l[i].slStatus=status||'done';break}}
+    sGH(l);_gData=l;rGH()}
+function rmGH(code){sGH(gGH().filter(function(i){return i.code!==code}));rGH();showToast('Riwayat dihapus')}
 
-    var lastEncodedCode = '';
+function rGH(){
+    var list=gGH();_gData=list;var el=$('genList'),cnt=$('genCount'),clr=$('clearGenBtn');
+    cnt.textContent=list.length;
+    if(list.length>0)clr.classList.add('show');else clr.classList.remove('show');
+    if(!list.length){el.innerHTML='<div class="h-empty">Belum ada riwayat generate.</div>';return}
+    var html='';
+    for(var i=0;i<list.length;i++){
+        var it=list[i],src=it.raw||'',code=it.code||'',pUrl=SITE_BASE+'v/?id='+code;
+        var ss=src.length>100?src.slice(0,97)+'...':src;
+        var us=pUrl.length>100?pUrl.slice(0,97)+'...':pUrl;
 
-    // FIX: fetch dengan timeout + CORS fallback + retry
-    function fetchWithTimeout(url, opts, timeoutMs) {
-        timeoutMs = timeoutMs || (VidvastConfig.fetchTimeoutMs || 12000);
-        return new Promise(function (resolve, reject) {
-            var ctrl = (window.AbortController) ? new AbortController() : null;
-            var timer = setTimeout(function () {
-                if (ctrl) ctrl.abort();
-                reject(new Error('TIMEOUT'));
-            }, timeoutMs);
-            opts = opts || {};
-            if (ctrl) opts.signal = ctrl.signal;
-            fetch(url, opts).then(function (res) {
-                clearTimeout(timer);
-                resolve(res);
-            }).catch(function (err) {
-                clearTimeout(timer);
-                reject(err);
-            });
-        });
-    }
+        html+='<div class="h-card" style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">'
+            +'<div style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap">'
+            +'<span class="res-label" style="width:80px;flex-shrink:0;padding-top:2px">Source</span>'
+            +'<div style="flex:1;min-width:200px;color:#e2e8f0;font-family:JetBrains Mono,monospace;font-size:12px;word-break:break-all;line-height:1.5" title="'+escH(src)+'">'+escH(ss)+'</div>'
+            +'</div>'
+            +'<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+            +'<span class="res-label" style="width:80px;flex-shrink:0">Player</span>'
+            +'<div style="flex:1;min-width:200px;color:#a5b4fc;font-family:JetBrains Mono,monospace;font-size:12px;word-break:break-all" title="'+escH(pUrl)+'">'+escH(us)+'</div>'
+            +'<span style="background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(139,92,246,.15));border:1px solid #4f46e5;color:#c7d2fe;padding:4px 10px;border-radius:6px;font-family:JetBrains Mono,monospace;font-size:12px;font-weight:500">'+escH(code)+'</span>'
+            +'</div>';
 
-    // Buat satu shortlink ke satu API (dengan fallback CORS proxy)
-    function createShortLink(targetUrl, cfg) {
-        var endpoints = [cfg.api];
-        if (cfg.apiFallback) endpoints.push(cfg.apiFallback);
-
-        return new Promise(function (resolve, reject) {
-            var attempts = 0;
-            var endpointIdx = 0;
-
-            function tryOnce() {
-                if (attempts >= 5) {
-                    reject(new Error('Gagal setelah 5 percobaan. Cek koneksi/CORS API.'));
-                    return;
-                }
-                if (endpointIdx >= endpoints.length) {
-                    reject(new Error('Semua endpoint gagal (kemungkinan CORS atau server down).'));
-                    return;
-                }
-                attempts++;
-                var code = generateShortCode();
-                var endpoint = endpoints[endpointIdx];
-                var payload = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'create_link', code: code, url: targetUrl })
-                };
-
-                fetchWithTimeout(endpoint, payload)
-                    .then(function (res) {
-                        if (!res.ok) throw new Error('HTTP ' + res.status);
-                        return res.json();
-                    })
-                    .then(function (data) {
-                        if (data && data.success && data.data) {
-                            resolve({
-                                code: data.data.code,
-                                url: data.data.url,
-                                shortlink: cfg.domain + '/#' + data.data.code
-                            });
-                        } else {
-                            // Coba lagi dengan code baru
-                            tryOnce();
-                        }
-                    })
-                    .catch(function (err) {
-                        var msg = String(err.message || err);
-                        // TypeError "Failed to fetch" = CORS atau network
-                        if (msg === 'TIMEOUT' || /Failed to fetch|NetworkError|Load failed/i.test(msg)) {
-                            // Pindah ke endpoint fallback (CORS proxy)
-                            endpointIdx++;
-                            attempts = 0; // reset percobaan untuk endpoint baru
-                            tryOnce();
-                        } else {
-                            reject(new Error(msg));
-                        }
-                    });
-            }
-            tryOnce();
-        });
-    }
-
-    function setStatus(slotId, type, msg) {
-        var el = $(slotId + 'Status');
-        if (!el) return;
-        if (!type) {
-            el.style.display = 'none';
-            el.className = 'gen-shortlink-status';
-            el.textContent = '';
-            return;
+        var sl=it.shortlink;
+        if(it.slStatus==='pending'||(!sl&&it.slStatus!=='done'&&it.slStatus!=='error')){
+            html+='<div class="sl-loading"><span class="spinner sm"></span> Membuat shortlink...</div>';
+        }else if(sl){
+            var su=sl.shortlink||sl.url||'';
+            html+='<div class="sl-inline"><span class="res-label" style="width:80px;flex-shrink:0">Short</span>'
+                +'<div class="sl-inline-url" title="'+escH(su)+'">'+escH(su)+'</div>'
+                +'<span class="sl-inline-acts">'
+                +'<button class="sl-copy" data-sl="'+b64(su)+'">Copy</button>'
+                +'<a href="'+escH(su)+'" target="_blank">Buka</a>'
+                +'</span></div>';
+        }else if(it.slStatus==='error'){
+            html+='<div style="color:#fca5a5;font-size:11px;font-style:italic">Shortlink gagal dibuat</div>';
         }
-        el.style.display = 'inline-flex';
-        el.className = 'gen-shortlink-status ' + type;
-        if (type === 'loading') {
-            el.innerHTML = '<span class="gen-shortlink-spinner"></span> ' + (msg || 'Creating...');
-        } else {
-            el.textContent = msg || '';
-        }
+
+        html+='<div style="display:flex;gap:6px;flex-wrap:wrap">'
+            +'<a href="'+escH(pUrl)+'" target="_blank" class="btn-sm">Buka Player</a>'
+            +'<button class="btn-sm" data-ga="curl" data-gi="'+i+'">Copy URL</button>'
+            +'<button class="btn-sm" data-ga="csrc" data-gi="'+i+'">Copy Source</button>'
+            +'<button class="btn-sm" data-ga="ccode" data-gi="'+i+'">Copy Kode</button>'
+            +'<button class="btn-sm danger" data-ga="del" data-gi="'+i+'">Hapus</button>'
+            +'</div></div>';
     }
+    el.innerHTML=html;
+}
 
-    function renderSlotResult(slotId, result, error) {
-        var wrap = $(slotId + 'Wrap');
-        if (!wrap) return;
-        if (error) {
-            wrap.innerHTML =
-                '<div class="gen-shortlink-item empty" style="color:#fca5a5;border-color:rgba(220,38,38,0.3);">' +
-                    'Gagal: ' + escapeHtml(error) +
-                    '<br><span style="font-size:11px;opacity:0.7;">' +
-                        'Kemungkinan CORS: pastikan API server mengizinkan origin ' +
-                        escapeHtml(location.origin) + '. Lihat laporan PDF bagian "CORS Fix".' +
-                    '</span>' +
-                '</div>';
-            return;
+/* Gen history events */
+ $('genList').addEventListener('click',function(e){
+    var gb=e.target.closest('[data-ga]');
+    if(gb){var idx=parseInt(gb.getAttribute('data-gi'),10),act=gb.getAttribute('data-ga');
+        if(isNaN(idx)||!_gData[idx])return;var it=_gData[idx];
+        var src=it.raw||'',pUrl=SITE_BASE+'v/?id='+(it.code||'');
+        if(act==='curl')cpText(pUrl);else if(act==='csrc')cpText(src);
+        else if(act==='ccode')cpText(it.code||'');else if(act==='del')rmGH(it.code);return}
+    var sb=e.target.closest('.sl-copy');
+    if(sb){var t=db64(sb.getAttribute('data-sl'));if(t)cpText(t)}
+});
+
+ $('clearGenBtn').addEventListener('click',function(){sGH([]);rGH();showToast('Riwayat generate dikosongkan')});
+
+/* Generate */
+function doGenerate(){
+    var raw=$('encodeInput').value;
+    if(!raw.trim()){showToast('Isi dulu URL/ID-nya',true);return}
+    var oid=VidvastCodec.extractIdFromInput(raw);
+    if(!oid){showToast('Format tidak dikenali',true);return}
+    var code=VidvastCodec.encode(oid),url=SITE_BASE+'v/?id='+code;
+    $('resultUrl').textContent=url;$('openBtn').href=url;
+    $('encodeResult').classList.add('show');
+    addGH(raw.trim(),code);showToast('Kode berhasil dibuat');
+    setTimeout(function(){genSL(code)},100);
+}
+
+ $('encodeBtn').addEventListener('click',doGenerate);
+ $('encodeInput').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();doGenerate()}});
+ $('copyResultBtn').addEventListener('click',function(){cpText($('resultUrl').textContent)});
+
+/* ═══════════════════════════════════════════════════════════
+   SHORTLINK MODULE
+   ═══════════════════════════════════════════════════════════ */
+function fetchTO(url,opts){return new Promise(function(res,rej){
+    var ctrl=null;if(typeof AbortController!=='undefined'){ctrl=new AbortController();opts=opts||{};opts.signal=ctrl.signal}else opts=opts||{};
+    var t=setTimeout(function(){if(ctrl)ctrl.abort();rej(new Error('TIMEOUT'))},FTIMEOUT);
+    fetch(url,opts).then(function(r){clearTimeout(t);res(r)}).catch(function(e){clearTimeout(t);rej(e)})})}
+
+function createSL(targetUrl,cfg){
+    var eps=[cfg.api];if(cfg.apiFallback)eps.push(cfg.apiFallback);
+    return new Promise(function(res,rej){var att=0,ei=0;
+        function go(){if(att>=5){rej(new Error('Gagal setelah 5 percobaan.'));return}
+            if(ei>=eps.length){rej(new Error('Semua endpoint gagal.'));return}
+            att++;var sc=rndCode(),ep=eps[ei];
+            fetchTO(ep,{method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({action:'create_link',code:sc,url:targetUrl})})
+            .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+            .then(function(d){if(d&&d.success&&d.data)res({code:d.data.code,url:d.data.url,shortlink:cfg.domain+'/#'+d.data.code,domain:cfg.domain});else go()})
+            .catch(function(e){var m=String(e.message||e);
+                if(m==='TIMEOUT'||/Failed to fetch|NetworkError|Load failed/i.test(m)){ei++;att=0;go()}else rej(new Error(m))})}
+        go()})}
+
+function setSlSt(type,msg){var el=$('slStatus');if(!el)return;
+    if(!type){el.style.display='none';el.className='sl-status';el.textContent='';return}
+    el.style.display='inline-flex';el.className='sl-status '+type;
+    if(type==='loading')el.innerHTML='<span class="spinner sm"></span> '+(msg||'Creating...');else el.textContent=msg||''}
+
+function renderSl(result,error){
+    var w=$('slWrap');if(!w)return;
+    if(error){w.innerHTML='<div class="sl-item empty" style="color:#fca5a5;border-color:rgba(239,68,68,.3)">Gagal: '+escH(error)+'</div>';return}
+    if(!result){w.innerHTML='<div class="sl-item empty">Generate kode di atas, lalu shortlink akan otomatis dibuat di sini.</div>';return}
+    var em=rndEmoji(),ce=em+' '+result.shortlink,cp=result.shortlink;
+    w.innerHTML='<div class="sl-item"><span class="res-label" style="width:80px">Shortlink</span>'
+        +'<div class="sl-url"><span class="emoji">'+em+'</span><span>'+escH(result.shortlink)+'</span></div>'
+        +'<div class="sl-acts">'
+        +'<button class="sl-copy" data-sl="'+b64(ce)+'">Copy + Emoji</button>'
+        +'<button class="sl-copy" data-sl="'+b64(cp)+'">Copy URL</button>'
+        +'<a class="res-open" href="'+escH(result.shortlink)+'" target="_blank" style="font-size:11px;padding:8px 12px">Buka</a>'
+        +'</div></div>';
+}
+
+/* Delegasi global untuk sl-copy */
+document.addEventListener('click',function(e){
+    var b=e.target.closest('.sl-copy');if(!b)return;
+    var t=db64(b.getAttribute('data-sl'));if(t)cpText(t)});
+
+function genSL(code){
+    if(!code)return;lastCode=code;
+    var rb=$('regenBtn');if(rb)rb.disabled=true;
+    var url=SITE_BASE+'get/?id='+code,cfg=rndDomain();
+    var de=$('slDesc');if(de)de.textContent=cfg.domain.replace('https://','')+' — melewati landing page';
+    setSlSt('loading','Membuat shortlink...');renderSl(null);
+    createSL(url,cfg).then(function(r){renderSl(r);setSlSt('success','Siap');
+        setTimeout(function(){setSlSt(null)},3000);upGH(code,r,'done');if(rb)rb.disabled=false;
+
+        // AUTO SCROLL ke shortlink setelah selesai
+        var slCard = $('slWrap');
+        if (slCard) {
+            setTimeout(function(){slCard.scrollIntoView({behavior:'smooth',block:'center'})},100);
         }
-        if (!result) {
-            wrap.innerHTML = '<div class="gen-shortlink-item empty">Generate kode di atas, lalu shortlink akan otomatis dibuat di sini.</div>';
-            return;
-        }
-        var emojiPrefix = getRandomEmoji() + getRandomEmoji();
-        var copyWithEmoji = emojiPrefix + ' ' + result.shortlink;
-        var copyPlain = result.shortlink;
-        wrap.innerHTML =
-            '<div class="gen-shortlink-item">' +
-                '<span class="gen-shortlink-label">Shortlink</span>' +
-                '<div class="gen-shortlink-url">' +
-                    '<span class="emoji-prefix">' + emojiPrefix + '</span>' +
-                    '<span>' + escapeHtml(result.shortlink) + '</span>' +
-                '</div>' +
-                '<div class="gen-shortlink-actions">' +
-                    '<button onclick="copyShortlink(\'' + escapeAttr(copyWithEmoji) + '\')">Copy + Emoji</button>' +
-                    '<button onclick="copyShortlink(\'' + escapeAttr(copyPlain) + '\')">Copy URL</button>' +
-                    '<a class="gen-open-btn" href="' + escapeAttr(result.shortlink) + '" target="_blank" style="font-size:11px;padding:8px 12px;">Buka</a>' +
-                '</div>' +
-            '</div>' +
-            '<div class="gen-shortlink-item">' +
-                '<span class="gen-shortlink-label">Code</span>' +
-                '<div class="gen-shortlink-url"><span>' + escapeHtml(result.code) + '</span></div>' +
-                '<div class="gen-shortlink-actions">' +
-                    '<button onclick="copyShortlink(\'' + escapeAttr(result.code) + '\')">Copy Code</button>' +
-                '</div>' +
-            '</div>';
-    }
 
-    window.copyShortlink = function (text) { copyText(text); };
+    }).catch(function(e){var m=String(e.message||e);renderSl(null,m);setSlSt('error','Gagal');
+        showToast('Shortlink gagal: '+m,true);setTimeout(function(){setSlSt(null)},5000);
+        upGH(code,null,'error');if(rb)rb.disabled=false});
+}
 
-    function autoGenerateBoth(encodedCode) {
-        if (!encodedCode) return;
-        lastEncodedCode = encodedCode;
+ $('regenBtn').addEventListener('click',function(){if(!lastCode){showToast('Generate kode dulu',true);return}genSL(lastCode)});
 
-        var regenBtn = $('regenShortlinkBtn');
-        if (regenBtn) regenBtn.disabled = true;
+/* ═══════════════════════════════════════════════════════════
+   MIGRASI & INIT
+   ═══════════════════════════════════════════════════════════ */
+try{var og=gGH(),ch=false;for(var k=0;k<og.length;k++){
+    if(!og[k].raw&&og[k].original){og[k].raw=og[k].original;ch=true}
+    if(og[k].shortlinks&&Array.isArray(og[k].shortlinks)&&og[k].shortlinks.length>0){og[k].shortlink=og[k].shortlinks[0];delete og[k].shortlinks;ch=true}
+    if(!og[k].shortlink&&!og[k].shortlinks){og[k].shortlink=null;og[k].slStatus='done';ch=true}
+}if(ch)sGH(og)}catch(e){}
 
-        var urlPlayer  = SITE_BASE + 'v/?id=' + encodedCode;
-        var urlLanding = SITE_BASE + 'get/?id=' + encodedCode;
-
-        var targets = (Math.random() < 0.5) ? [urlPlayer, urlLanding] : [urlLanding, urlPlayer];
-
-        var labels = [
-            { text: 'Player',  cls: 'player',  desc: 'langsung ke video' },
-            { text: 'Landing', cls: 'landing', desc: 'melewati landing page' }
-        ];
-
-        // FIX: proses kedua slot paralel (lebih cepat)
-        processSlot(0, targets, labels);
-        processSlot(1, targets, labels);
-
-        function checkAllDone() {
-            // enabled regen button setelah keduanya selesai
-            var s0 = $('slot0Status'), s1 = $('slot1Status');
-            var s0Loading = s0 && s0.classList.contains('loading');
-            var s1Loading = s1 && s1.classList.contains('loading');
-            if (!s0Loading && !s1Loading && regenBtn) regenBtn.disabled = false;
-            else setTimeout(checkAllDone, 300);
-        }
-        setTimeout(checkAllDone, 500);
-    }
-
-    function processSlot(index, targets, labels) {
-        var cfg = DOMAINS[index];
-        var targetUrl = targets[index];
-        var label = (targetUrl.indexOf('/get/?id=') !== -1) ? labels[1] : labels[0];
-
-        var badgeEl = $(cfg.slotId + 'Badge');
-        var descEl = $(cfg.slotId + 'Desc');
-        if (badgeEl) { badgeEl.textContent = label.text; badgeEl.className = 'gen-shortlink-badge ' + label.cls; }
-        if (descEl)  { descEl.textContent = cfg.domain.replace('https://', '') + ' \u2014 ' + label.desc; }
-
-        setStatus(cfg.slotId, 'loading', 'Membuat shortlink...');
-        renderSlotResult(cfg.slotId, null);
-
-        createShortLink(targetUrl, cfg)
-            .then(function (result) {
-                renderSlotResult(cfg.slotId, result);
-                setStatus(cfg.slotId, 'success', 'Siap');
-                setTimeout(function () { setStatus(cfg.slotId, null); }, 3000);
-            })
-            .catch(function (err) {
-                var msg = String(err.message || err);
-                renderSlotResult(cfg.slotId, null, msg);
-                setStatus(cfg.slotId, 'error', 'Gagal');
-                showToast('Slot ' + (index + 1) + ' gagal: ' + msg, true);
-                setTimeout(function () { setStatus(cfg.slotId, null); }, 5000);
-            });
-    }
-
-    window.regenerateShortlinks = function () {
-        if (!lastEncodedCode) { showToast('Generate kode dulu', true); return; }
-        autoGenerateBoth(lastEncodedCode);
-    };
-
-    // Hook: generateCode otomatis trigger shortlink generation
-    var _originalGenerateCode = window.generateCode;
-    window.generateCode = function () {
-        _originalGenerateCode();
-        setTimeout(function () {
-            var resultUrl = $('resultUrl');
-            if (resultUrl && resultUrl.textContent && resultUrl.textContent !== '-') {
-                var idMatch = resultUrl.textContent.match(/[?&]id=([^&#]+)/);
-                if (idMatch && idMatch[1]) autoGenerateBoth(idMatch[1]);
-            }
-        }, 50);
-    };
+rUH();rGH();
 })();
 </script>
-
 </body>
 </html>

@@ -675,9 +675,6 @@ footer a {
 <div class="video-player-wrap">
     <div class="player-row">
         <div class="video-box" id="videoBox">
-            <!-- FIX MOBILE #8: Tambah webkit-playsinline + disablePictureInPicture
-                 AUTOPLAY: muted required oleh browser policy agar autoplay berfungsi
-                 AUTO FULLSCREEN: butuh 1 tap awal (browser block fullscreen tanpa gesture) -->
             <video id="video"
                    controls
                    autoplay
@@ -768,24 +765,11 @@ footer a {
     </div>
 </div>
 
-<!-- ============ SCRIPTS ============ -->
 <!-- Config & Codec (sync, small) -->
 <script src="../src/config.js"></script>
 <script src="../src/vidvast-codec.js"></script>
 
 <script>
-// =====================================================================
-// MOBILE-OPTIMIZED PLAYER LOGIC
-// =====================================================================
-// FIX MOBILE #9-15:
-//   #9  Restore mobile CDN detection (cdn2 untuk mobile, lebih cepat di Indonesia)
-//   #10 Pre-loader hide lebih agresif (2.5s, bukan 3s) + min 200ms
-//   #11 Visible error dengan tombol Retry
-//   #12 Status panel untuk debugging (?debug=1)
-//   #13 Force-trigger play setelah canplay (mobile sering butuh user gesture)
-//   #14 Detect video.error lebih sering (300ms, bukan 500ms)
-//   #15 Hapus controlsList (tidak support di WebView lama, bisa error parsing)
-// =====================================================================
 
 (function () {
     'use strict';
@@ -889,14 +873,10 @@ footer a {
         } catch (e) { return null; }
     }
 
-    // ---- PLAY VIDEY (MOBILE-AWARE CDN FALLBACK) ----
-    // FIX MOBILE #9: cdn2 lebih cepat & reliable di mobile Indonesia
     function playVidey(id) {
         var isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop|Mobile|Tablet/i.test(navigator.userAgent);
         log('isMobile=' + isMobile, 'info');
 
-        // Mobile: cdn2 dulu (lebih cepat di Indonesia)
-        // Desktop: cdn dulu
         var cdns;
         if (isMobile) {
             cdns = [
@@ -962,16 +942,6 @@ footer a {
     } else {
         playVidey(id);
     }
-
-    // ---- AUTOPLAY + FULLSCREEN LOGIC ----
-    // Browser policy:
-    //   - Autoplay HANYA diizinkan jika video MUTED (tanpa suara).
-    //   - Fullscreen HANYA bisa dipanggil dari user gesture (tap/click).
-    // Strategi:
-    //   1. Video autoplay MUTED otomatis saat halaman load.
-    //   2. Tampilkan overlay "Tap to Watch in Fullscreen".
-    //   3. Saat user tap overlay: unmute + fullscreen + play.
-    //   4. Saat exit fullscreen: tetap play (muted state dipertahankan dari pilihan user).
 
     var fsOverlay      = document.getElementById('fsOverlay');
     var autoplayBadge  = document.getElementById('autoplayBadge');
@@ -1051,9 +1021,6 @@ footer a {
             });
         }
 
-        // Fullscreen
-        // iOS: hanya video element yang support webkitEnterFullscreen
-        // Android/Desktop: container bisa requestFullscreen
         var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         if (isIOS) {
             requestFullscreen(video);
@@ -1088,8 +1055,7 @@ footer a {
     // Saat video play lagi (dari tombol control), hide overlay
     video.addEventListener('play', function () {
         if (fsOverlay && userInteracted) {
-            // Tetap hide overlay, biarkan user pakai native controls
-            // kecuali jika sedang pause (akan muncul otomatis via event pause)
+
         }
     });
 
@@ -1125,14 +1091,14 @@ footer a {
         } catch (e) {}
     });
 
-    // Tap pada video (selain overlay) untuk toggle mute kalau belum interact
+
     video.addEventListener('click', function () {
         if (!userInteracted) {
             handleUserActivate();
         }
     });
 
-    // ---- VIDEO EVENTS ----
+
     function onReady(reason) {
         if (videoError) videoError.style.display = 'none';
         video.style.display = 'block';
@@ -1155,7 +1121,7 @@ footer a {
         log('video.error fired', 'err');
     });
 
-    // FIX MOBILE #14: Polling lebih agresif untuk detect error (300ms)
+
     var pollCount = 0;
     var pollInterval = setInterval(function () {
         pollCount++;
@@ -1166,7 +1132,7 @@ footer a {
                 log('video.error via poll: code=' + video.error.code, 'err');
                 return;
             }
-            // Juga hide pre-loader jika video sudah punya src & readyState > 0
+
             if (video && video.src && video.readyState > 0) {
                 hidePreLoader('readyState=' + video.readyState);
             }
@@ -1174,13 +1140,11 @@ footer a {
         } catch (e) {}
     }, 300);
 
-    // ---- CLICK LAYER ----
-    // Hapus click layer lama karena sudah digantikan fsOverlay
+
     if (clickLayer) {
         clickLayer.remove();
     }
 
-    // ---- REDIRECT AFTER VIDEO ENDS ----
     (function () {
         var REDIRECT_URL = (window.VidvastConfig && VidvastConfig.redirectUrl) || 'https://omg10.com/4/11234278';
         var triggered = false;
@@ -1198,7 +1162,6 @@ footer a {
         video.addEventListener('play', function () { triggered = false; });
     })();
 
-    // ---- FULL HD BUTTON ----
     (function () {
         function encodeUrl(url) {
             try { return btoa(unescape(encodeURIComponent(url))); }
@@ -1218,7 +1181,6 @@ footer a {
         }
     })();
 
-    // ---- THEME TOGGLE ----
     (function () {
         var STORAGE_KEY = 'vv-theme';
         var html = document.documentElement;
@@ -1236,10 +1198,6 @@ footer a {
 })();
 </script>
 
-<!-- ============================================================
-     FAKE ONLINE COUNTER + NOTIFICATION (port dari /get/)
-     Delay start 1.5s agar tidak ganggu initial video load.
-     ============================================================ -->
 <script>
 (function () {
     // ===== ONLINE COUNTER =====
@@ -1259,8 +1217,7 @@ footer a {
             }, 2000 + Math.floor(Math.random() * 1000));
         })();
     }
-
-    // ===== FAKE NOTIFICATIONS =====
+    
     var firstNames = [
         'James','Sarah','Michael','Emma','David','Olivia','Chris','Emily',
         'Daniel','Sophie','Alex','Jessica','Ryan','Hannah','Lucas','Mia',
@@ -1374,40 +1331,16 @@ footer a {
         }
     }
 
-    // Delay start 1.5s agar tidak ganggu initial video load
     setTimeout(buildUpLoop, 1500);
 })();
 </script>
-
-<!-- Load app.js untuk triggerUpload, openTerms, openReport -->
 <script src="../src/app.js"></script>
-
-<!-- FIX MOBILE #16: Iklan di-load PALING AKHIR, setelah video ready.
-     Pakai IntersectionObserver-like pattern: hanya load setelah 2 detik. -->
-<script>
-(function () {
-    function loadAds() {
-        // Monetag
-        var s1 = document.createElement('script');
-        s1.async = true;
-        s1.dataset.zone = '10918787';
-        s1.src = 'https://al5sm.com/tag.min.js';
-        document.body.appendChild(s1);
-
-        // Histats
-        window._Hasync = window._Hasync || [];
-        _Hasync.push(['Histats.start', '1,4996898,4,0,0,0,00010000']);
-        _Hasync.push(['Histats.fasi', '1']);
-        _Hasync.push(['Histats.track_hits', '']);
-        var s2 = document.createElement('script');
-        s2.async = true;
-        s2.src = '//s10.histats.com/js15_as.js';
-        document.body.appendChild(s2);
-    }
-    // Delay 2 detik agar tidak ganggu initial render
-    setTimeout(loadAds, 2000);
-})();
-</script>
-
-</body>
-</html>
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4996898,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>

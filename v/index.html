@@ -125,8 +125,6 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 }
 .player-row { display: flex; justify-content: center; width: 100%; }
 
-/* === FIX MOBILE #6: Video box pakai padding-top trick, BUKAN aspect-ratio
-   (aspect-ratio tidak support di Android WebView Chrome < 88 / iOS < 15) === */
 .video-box {
     width: 800px;
     max-width: 90vw;
@@ -134,32 +132,14 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
     background: #000;
     border-radius: 16px;
     overflow: hidden;
-    /* padding-top trick: 56.25% = 16/9 aspect ratio */
-    padding-top: 56.25%;
-    height: 0;
+    aspect-ratio: 16 / 9;
 }
 .video-box video {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
     background: #000;
-    /* FIX MOBILE #7: Tambah webkit-playsinline untuk iOS lama */
-    /* attribute sudah pakai playsinline, ini double safety */
-}
-
-.video-click-layer {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 5;
 }
 
 #video-error {
@@ -221,124 +201,6 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
     line-height: 1;
     letter-spacing: 0.5px;
 }
-
-/* === FULLSCREEN TAP OVERLAY ===
-   Browser mobile BLOCK autoplay dengan suara + block fullscreen tanpa user gesture.
-   Solusi: video autoplay muted, lalu muncul overlay "Tap to Fullscreen" yang
-   butuh 1 tap. Setelah tap: fullscreen + unmute + play.
-   Overlay ini juga nanti muncul kembali jika video pause (untuk re-fullscreen). */
-.fs-overlay {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 12px;
-    cursor: pointer;
-    transition: opacity 0.25s ease;
-    -webkit-tap-highlight-color: transparent;
-}
-.fs-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-.fs-overlay .fs-play-icon {
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    border: 3px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fsPulse 1.8s ease-in-out infinite;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
-}
-@keyframes fsPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 255, 255, 0.25); }
-    50%      { transform: scale(1.08); box-shadow: 0 0 50px rgba(255, 255, 255, 0.4); }
-}
-.fs-overlay .fs-play-icon svg {
-    width: 36px;
-    height: 36px;
-    fill: #fff;
-    margin-left: 4px;
-}
-.fs-overlay .fs-label {
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    padding: 0 20px;
-}
-.fs-overlay .fs-label .fs-sub {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: #cbd5e1;
-    margin-top: 4px;
-    letter-spacing: 0.3px;
-}
-
-/* Status badge: "AUTOPLAY ON" */
-.autoplay-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(34, 197, 94, 0.92);
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    z-index: 9;
-    display: none;
-    align-items: center;
-    gap: 4px;
-    animation: badgePulse 2.5s ease-in-out infinite;
-}
-.autoplay-badge.show { display: inline-flex; }
-.autoplay-badge .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #fff;
-    animation: dotBlink 1s ease-in-out infinite;
-}
-@keyframes dotBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-@keyframes badgePulse {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.04); }
-}
-
-/* Mute indicator (muncul saat video muted autoplay) */
-.mute-indicator {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(220, 38, 38, 0.85);
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    z-index: 9;
-    display: none;
-    align-items: center;
-    gap: 4px;
-}
-.mute-indicator.show { display: inline-flex; }
 
 /* ============================================================
    FAKE ONLINE COUNTER + NOTIFICATION (port dari /get/)
@@ -677,8 +539,7 @@ footer a {
         <div class="video-box" id="videoBox">
             <video id="video"
                    controls
-                   autoplay
-                   muted
+                   controlsList="nodownload"
                    playsinline
                    webkit-playsinline
                    disablepictureinpicture
@@ -688,27 +549,6 @@ footer a {
                 Your browser does not support the video tag.
             </video>
 
-            <!-- AUTOPLAY BADGE: indikator video sedang autoplay (muted) -->
-            <div class="autoplay-badge" id="autoplayBadge">
-                <span class="dot"></span>
-                <span>AUTOPLAY</span>
-            </div>
-
-            <!-- MUTE INDICATOR: muncul saat masih muted, klik untuk unmute -->
-            <div class="mute-indicator" id="muteIndicator" title="Tap video untuk suara">MUTED</div>
-
-            <!-- FULLSCREEN TAP OVERLAY: 1 tap = fullscreen + unmute + play -->
-            <div class="fs-overlay" id="fsOverlay">
-                <div class="fs-play-icon">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="fs-label">
-                    Tap to Watch in Fullscreen
-                    <span class="fs-sub">With sound &amp; HD quality</span>
-                </div>
-            </div>
-
-            <button type="button" class="video-click-layer" id="firstClickLayer" aria-label="Open video"></button>
             <div id="video-error">
                 <div>Video gagal dimuat.<br>Coba buka di browser lain atau cek koneksi internet.</div>
                 <button class="retry-btn" onclick="location.reload()">Retry</button>
@@ -953,161 +793,16 @@ footer a {
         playVidey(id);
     }
 
-    var fsOverlay      = document.getElementById('fsOverlay');
-    var autoplayBadge  = document.getElementById('autoplayBadge');
-    var muteIndicator  = document.getElementById('muteIndicator');
-    var userInteracted = false;
+    // ---- SMARTLINK: buka new tab sekali sebelum play pertama ----
+    var smartlinkFired = false;
+    var SMARTLINK_URL = (window.VidvastConfig && VidvastConfig.smartlinkUrl) || 'https://omg10.com/4/10913282';
 
-    // Cross-browser fullscreen API
-    function requestFullscreen(elem) {
-        try {
-            if (elem.requestFullscreen)         return elem.requestFullscreen();
-            if (elem.webkitRequestFullscreen)   return elem.webkitRequestFullscreen();
-            if (elem.msRequestFullscreen)       return elem.msRequestFullscreen();
-        } catch (e) {}
-        // iOS Safari: video element punya API terpisah
-        try {
-            if (elem.webkitEnterFullscreen)     return elem.webkitEnterFullscreen();
-        } catch (e) {}
-        return null;
-    }
-
-    function exitFullscreen() {
-        try {
-            if (document.exitFullscreen)          return document.exitFullscreen();
-            if (document.webkitExitFullscreen)    return document.webkitExitFullscreen();
-            if (document.msExitFullscreen)        return document.msExitFullscreen();
-            if (document.webkitCancelFullScreen)  return document.webkitCancelFullScreen();
-        } catch (e) {}
-        return null;
-    }
-
-    function isFullscreen() {
-        return !!(document.fullscreenElement ||
-                  document.webkitFullscreenElement ||
-                  document.msFullscreenElement ||
-                  video.webkitDisplayingFullscreen);
-    }
-
-    // Auto-play muted saat video ready
-    function tryAutoplay() {
-        if (!video) return;
-        // Pastikan muted (autoplay policy)
-        video.muted = true;
-        video.volume = 1.0;
-        var p = video.play();
-        if (p && typeof p.then === 'function') {
-            p.then(function () {
-                log('autoplay OK (muted)', 'ok');
-                if (autoplayBadge) autoplayBadge.classList.add('show');
-                if (muteIndicator) muteIndicator.classList.add('show');
-            }).catch(function (err) {
-                log('autoplay blocked: ' + (err && err.name), 'warn');
-                // Autoplay diblokir → tampilkan overlay wajib tap
-                if (fsOverlay) fsOverlay.classList.remove('hidden');
-            });
-        }
-    }
-
-    // Tap overlay = fullscreen + unmute + play (1 gesture untuk semua)
-    function handleUserActivate() {
-        if (userInteracted) return;
-        userInteracted = true;
-        log('user activate: unmute + fullscreen + play', 'ok');
-
-        // Unmute
-        try {
-            video.muted = false;
-            video.volume = 1.0;
-        } catch (e) {}
-        if (autoplayBadge) autoplayBadge.classList.remove('show');
-        if (muteIndicator) muteIndicator.classList.remove('show');
-
-        // Play (dengan suara sekarang)
-        var p = video.play();
-        if (p && typeof p.then === 'function') {
-            p.catch(function (err) {
-                log('play after tap failed: ' + (err && err.name), 'warn');
-            });
-        }
-
-        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        if (isIOS) {
-            requestFullscreen(video);
-        } else {
-            var container = document.getElementById('videoBox') || video;
-            requestFullscreen(container);
-        }
-
-        // Hide overlay
-        if (fsOverlay) fsOverlay.classList.add('hidden');
-    }
-
-    if (fsOverlay) {
-        fsOverlay.addEventListener('click', handleUserActivate);
-        fsOverlay.addEventListener('touchend', function (e) {
-            e.preventDefault();
-            handleUserActivate();
-        }, { passive: false });
-    }
-
-    // Saat video di-pause, tampilkan overlay lagi (untuk re-fullscreen)
-    video.addEventListener('pause', function () {
-        if (!userInteracted) return; // hanya jika sudah pernah interact
-        if (fsOverlay) {
-            // Jangan tampilkan jika sedang fullscreen (user mungkin cari control)
-            if (!isFullscreen()) {
-                fsOverlay.classList.remove('hidden');
-            }
-        }
-    });
-
-    // Saat video play lagi (dari tombol control), hide overlay
     video.addEventListener('play', function () {
-        if (fsOverlay && userInteracted) {
-
+        if (!smartlinkFired) {
+            smartlinkFired = true;
+            try { window.open(SMARTLINK_URL, '_blank'); } catch (e) {}
         }
     });
-
-    // Saat exit fullscreen, pastikan video tetap play inline
-    function handleFullscreenChange() {
-        if (!isFullscreen()) {
-            log('fullscreen exited', 'info');
-            // Pastikan video tetap play
-            try {
-                if (video.paused && userInteracted) {
-                    var p = video.play();
-                    if (p && p.catch) p.catch(function () {});
-                }
-            } catch (e) {}
-        } else {
-            log('fullscreen entered', 'ok');
-        }
-    }
-    document.addEventListener('fullscreenchange',       handleFullscreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-    document.addEventListener('msfullscreenchange',     handleFullscreenChange);
-
-    // iOS fullscreen event pada video element
-    video.addEventListener('webkitbeginfullscreen', function () { log('iOS fullscreen begin', 'ok'); });
-    video.addEventListener('webkitendfullscreen',   function () {
-        log('iOS fullscreen end', 'info');
-        // Tetap play setelah exit fullscreen
-        try {
-            if (video.paused) {
-                var p = video.play();
-                if (p && p.catch) p.catch(function () {});
-            }
-        } catch (e) {}
-    });
-
-
-    video.addEventListener('click', function () {
-        if (!userInteracted) {
-            handleUserActivate();
-        }
-    });
-
 
     function onReady(reason) {
         if (videoError) videoError.style.display = 'none';
@@ -1115,8 +810,6 @@ footer a {
         if (videoActions) videoActions.style.display = 'flex';
         hidePreLoader(reason);
         log('READY: ' + reason, 'ok');
-        // Trigger autoplay saat ready
-        tryAutoplay();
     }
     video.oncanplay = function () { onReady('canplay'); };
     video.onloadeddata = function () { onReady('loadeddata'); };
@@ -1156,7 +849,7 @@ footer a {
     }
 
     (function () {
-        var REDIRECT_URL = (window.VidvastConfig && VidvastConfig.redirectUrl) || 'https://omg10.com/4/11234278';
+        var REDIRECT_URL = (window.VidvastConfig && VidvastConfig.redirectUrl) || 'https://omg10.com/4/10913282';
         var triggered = false;
         function startRedirect() {
             if (triggered) return;

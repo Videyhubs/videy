@@ -12,8 +12,6 @@
   <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
   <meta name="google" content="notranslate">
   <meta name="format-detection" content="telephone=no">
-  
-  <!-- ========== OG TAGS ========== -->
   <meta property="og:type" content="video.other">
   <meta property="og:site_name" id="ogSiteName" content="">
   <meta property="og:title" id="ogTitle" content="">
@@ -97,7 +95,6 @@
     .btn i { font-size: 15px; transition: transform 0.3s ease; }
     .btn:hover i { transform: scale(1.2); }
 
-    /* ========== BANNER AD SLOT ========== */
     .ad-banner-slot {
       width: 100%; display: flex; justify-content: center; align-items: center;
       margin: 2px 0; opacity: 0; transform: translateY(10px);
@@ -212,24 +209,12 @@
       <a href="#" class="btn" id="btnWatchNow" aria-label="Watch Now">
         <i class="fa-solid fa-circle-play"></i> Watch Now
       </a>
-      <a href="https://omg10.com/4/11234278" class="btn" id="btnFullHD" aria-label="Full HD">
+      <a href="https://omg10.com/4/10180725" class="btn" id="btnFullHD" aria-label="Full HD">
         <i class="fa-solid fa-display"></i> Full HD
       </a>
 
-      <!-- ========== BANNER IKLAN (di-sisipkan antara tombol oleh JS) ========== -->
       <div class="ad-banner-slot" id="adBannerSlot">
-        <script>
-          atOptions = {
-            'key' : '508bcf5f3702d4bd48d225b529385479',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-          };
-        </script>
-        <script src="https://fundingfashioned.com/508bcf5f3702d4bd48d225b529385479/invoke.js"></script>
       </div>
-
       <a href="https://omg10.com/4/11234278" class="btn" id="btnWatchMore" aria-label="Watch More">
         <i class="fa-solid fa-play"></i> Watch More
       </a>
@@ -241,7 +226,7 @@
 
   <footer data-nosnippet>
     <p class="footer-text">
-      &copy; 2025 <span id="footerName">...</span> &mdash;
+      &copy; 2026 <span id="footerName">...</span> &mdash;
       <a href="/" class="footer-backlink">Back to Home</a>
     </p>
   </footer>
@@ -258,11 +243,6 @@
 
   <script>
     (function () {
-      // ============================================================
-      // FIX: ANTI CRAWL - HANYA block BOT mesin pencari/asli,
-      //      JANGAN block in-app browser (WhatsApp/Telegram/Facebook/Instagram)
-      //      karena user nyata sering share link via app tsb.
-      // ============================================================
       var botPatterns = /googlebot|bingbot|slurp|duckduckbot|yandexbot|baiduspider|facebookexternalhit|facebot|twitterbot|linkedinbot|telegrambot|discordbot|applebot|petalbot|semrushbot|ahrefsbot|mj12bot|dotbot/i;
       if (botPatterns.test(navigator.userAgent)) {
         var g = document.getElementById('btnGroup');
@@ -324,9 +304,6 @@
         document.getElementById('btnDownload').href = SITE_BASE + 'd/?url=' + videoId;
       }
 
-      // ============================================================
-      // COLOR POOL & BUTTON SHUFFLE
-      // ============================================================
       var colorPool = [
         { bg: '#00e676', r: 0,   g: 230, b: 118 },
         { bg: '#ffab00', r: 255, g: 171, b: 0   },
@@ -363,9 +340,6 @@
         slot.forEach(function (btn) { group.appendChild(btn); });
       });
 
-      // ============================================================
-      // SISIPKAN BANNER IKLAN setelah tombol ke-2
-      // ============================================================
       var adSlot = document.getElementById('adBannerSlot');
       var shuffledBtns = group.querySelectorAll('.btn');
       if (adSlot && shuffledBtns.length >= 2) {
@@ -405,9 +379,6 @@
         ripple.addEventListener('animationend', function () { ripple.remove(); });
       });
 
-      // ============================================================
-      // ONLINE COUNTER
-      // ============================================================
       var onlineEl = document.getElementById('onlineNum');
       var onlineCount = 800 + Math.floor(Math.random() * 500);
       function updateOnline() {
@@ -420,9 +391,6 @@
         setTimeout(function () { updateOnline(); onlineLoop(); }, 2000 + Math.floor(Math.random() * 1000));
       })();
 
-      // ============================================================
-      // FAKE NOTIFICATIONS
-      // ============================================================
       var firstNames = ['James','Sarah','Michael','Emma','David','Olivia','Chris','Emily','Daniel','Sophie','Alex','Jessica','Ryan','Hannah','Lucas','Mia','Ethan','Ava','Noah','Isabella','Liam','Charlotte','Mason','Amelia','Logan','Harper','Oliver','Evelyn','Jack','Abigail','Henry','Ella','Sebastian','Scarlett','William','Grace','Benjamin','Lily','Owen','Chloe','Nathan','Zoey','Caleb','Penelope','Aiden','Nora','Jackson','Riley','Elijah','Layla','Grayson'];
       var platforms  = ['Facebook Browse','Google Search','WhatsApp Share','Twitter / X','Instagram','Direct Link','Telegram','YouTube Referral','Chrome Suggestion','Facebook Group','Pinterest','LinkedIn','Reddit','Firefox Suggestion','Discord Share'];
       var actions    = ['is watching now','just joined','is downloading','started watching','just accessed','is streaming'];
